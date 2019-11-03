@@ -1,3 +1,7 @@
 *~
 *.bam
 *.bai
+*.sh.o*
+*.sh.po*
+*.failed
+#*#

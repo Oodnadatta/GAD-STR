@@ -13,3 +13,13 @@
 ## Creation Date : 20191102
 ## last revision date : 20191102
 ## Known bugs : None
+
+INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
+OUTPUTPREFIX=test
+LOGFILE=/user1/gad/an1770de/Tools/ExpansionHunter/20191102/log.log
+
+qsub -pe smp 1 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_expansionhunter.sh
+
+
+
+
