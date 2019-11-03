@@ -15,12 +15,15 @@
 ## Known bugs : None
 
 INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
-OUTPUTPREFIX=/user1/gad/an1770de/Tools/ExpansionHunter/20191102/"$(date +"%F_%H-%M-%S")"
-LOGFILE=/user1/gad/an1770de/Tools/ExpansionHunter/20191102/log.log
+DATE="$(date +"%F_%H-%M-%S")"
+OUTPUTDIR="/user1/gad/an1770de/Analyses/ExpansionHunter/$DATE"
+OUTPUTPREFIX="$OUTPUTDIR/$DATE"
+LOGFILE="$OUTPUTDIR/$DATE.log"
 
 # Launch the script on local host with --local option and on SGE with qsub without the --local option
 if [ $# -eq 1 ] && [ "x$1" = x--local ]
 then
+    mkdir -p "$OUTPUTDIR"
     INPUTFILE="$INPUTFILE" OUTPUTPREFIX="$OUTPUTPREFIX" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_expansionhunter.sh"
 else 
     qsub -pe smp 1 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_expansionhunter.sh

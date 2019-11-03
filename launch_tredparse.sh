@@ -14,9 +14,10 @@
 ## last revision date : 20191103
 ## Known bugs : None
 
+DATE="$(date +"%F_%H-%M-%S")"
 INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
-OUTPUTDIR=/user1/gad/an1770de/Tools/Tredparse/"$(date +"%F_%H-%M-%S")"
-LOGFILE="$OUTPUTDIR/log.log"
+OUTPUTDIR="/user1/gad/an1770de/Analyses/Tredparse/$DATE"
+LOGFILE="$OUTPUTDIR/$DATE.log"
 
 # Launch the script on local host with --local option and on SGE with qsub without the --local option
 if [ $# -eq 1 ] && [ "x$1" = x--local ]
