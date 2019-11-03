@@ -15,7 +15,7 @@
 ## Known bugs : None
 
 INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
-OUTPUTPREFIX=test
+OUTPUTPREFIX=/user1/gad/an1770de/Tools/ExpansionHunter/20191102/"$(date +"%F_%H-%M-%S")"
 LOGFILE=/user1/gad/an1770de/Tools/ExpansionHunter/20191102/log.log
 
 # Launch the script on local host with --local option and on SGE with qsub without the --local option

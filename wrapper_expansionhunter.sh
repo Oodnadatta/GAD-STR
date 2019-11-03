@@ -64,7 +64,7 @@ echo "command : /work/gad/shared/bin/expansionhunter/ExpansionHunter-v3.1.2-linu
 expansionhunter_exitcode=$?
 
 # Remove .bam and .bai symbolic links
-rm "$TMPDIR/Â$(basenam e"$INPUTFILE")"
+rm "$TMPDIR/$(basename "$INPUTFILE")"
 rm "$TMPDIR/$(basename "$INPUTFILE").bai"
 rmdir "$TMPDIR"
 
