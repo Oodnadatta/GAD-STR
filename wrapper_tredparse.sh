@@ -49,7 +49,7 @@ TREDPARSE="/work/gad/shared/bin/tredparse/Tredparse-20190901"
 . "$TREDPARSE/bin/activate"
 
 # Launch script command and check exit code
-echo "command : FIXME"
+echo "command : "$TREDPARSE/bin/tred.py" "$INPUTFILE" --workdir "$OUTPUTDIR" --ref hg19"
 "$TREDPARSE/bin/tred.py" "$INPUTFILE" --workdir "$OUTPUTDIR" --ref hg19
 
 tredparse_exitcode=$?
