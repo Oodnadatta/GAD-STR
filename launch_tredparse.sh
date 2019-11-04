@@ -14,10 +14,10 @@
 ## last revision date : 20191103
 ## Known bugs : None
 
-DATE="$(date +"%F_%H-%M-%S")"
 INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
-OUTPUTDIR="/user1/gad/an1770de/Analyses/Tredparse/$DATE"
-LOGFILE="$OUTPUTDIR/$DATE.log"
+DATE="$(date +"%F_%H-%M-%S")"
+OUTPUTDIR="/work/gad/shared/analyse/STR/Tredparse/$DATE"
+LOGFILE="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE.log"
 
 # Launch the script on local host with --local option and on SGE with qsub without the --local option
 if [ $# -eq 1 ] && [ "x$1" = x--local ]
@@ -25,5 +25,6 @@ then
     mkdir -p "$OUTPUTDIR"
     INPUTFILE="$INPUTFILE" OUTPUTDIR="$OUTPUTDIR" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_tredparse.sh"
 else 
-    qsub -pe smp 1 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTDIR="$OUTPUTDIR",LOGFILE="$LOGFILE" wrapper_tredparse.sh
+    mkdir -p "$OUTPUTDIR"
+    qsub -pe smp 1 -q transfer -v INPUTFILE="$INPUTFILE",OUTPUTDIR="$OUTPUTDIR",LOGFILE="$LOGFILE" wrapper_tredparse.sh
 fi

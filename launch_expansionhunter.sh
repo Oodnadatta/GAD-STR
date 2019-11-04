@@ -16,8 +16,8 @@
 
 INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
 DATE="$(date +"%F_%H-%M-%S")"
-OUTPUTDIR="/user1/gad/an1770de/Analyses/ExpansionHunter/$DATE"
-OUTPUTPREFIX="$OUTPUTDIR/$DATE"
+OUTPUTDIR="/work/gad/shared/analyse/STR/ExpansionHunter/$DATE"
+OUTPUTPREFIX="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE"
 LOGFILE="$OUTPUTDIR/$DATE.log"
 
 # Launch the script on local host with --local option and on SGE with qsub without the --local option
@@ -26,5 +26,6 @@ then
     mkdir -p "$OUTPUTDIR"
     INPUTFILE="$INPUTFILE" OUTPUTPREFIX="$OUTPUTPREFIX" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_expansionhunter.sh"
 else 
-    qsub -pe smp 1 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_expansionhunter.sh
+    mkdir -p "$OUTPUTDIR"
+    qsub -pe smp 1 -q transfer -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_expansionhunter.sh
 fi
