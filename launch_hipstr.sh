@@ -14,7 +14,7 @@
 ## last revision date : 20191104
 ## Known bugs : None
 
-INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
+INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/dijen017/dijen017.bam
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="/work/gad/shared/analyse/STR/HipSTR/$DATE"
 OUTPUTPREFIX="$OUTPUTDIR/$(basename -s .bam "$INPUTFILE")_$DATE"
@@ -28,5 +28,5 @@ then
     INPUTFILE="$INPUTFILE" OUTPUTFILE="$OUTPUTFILE" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_hipstr.sh"
 else 
     mkdir -p "$OUTPUTDIR"
-    qsub -pe smp 1 -q transfer -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_hipstr.sh
+    qsub -pe smp 2 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTFILE="$OUTPUTFILE",LOGFILE="$LOGFILE" wrapper_hipstr.sh
 fi

@@ -14,7 +14,7 @@
 ## last revision date : 20191103
 ## Known bugs : None
 
-INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
+INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/dijen017/dijen017.bam
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="/work/gad/shared/analyse/STR/Tredparse/$DATE"
 LOGFILE="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE.log"
@@ -26,5 +26,5 @@ then
     INPUTFILE="$INPUTFILE" OUTPUTDIR="$OUTPUTDIR" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_tredparse.sh"
 else 
     mkdir -p "$OUTPUTDIR"
-    qsub -pe smp 1 -q transfer -v INPUTFILE="$INPUTFILE",OUTPUTDIR="$OUTPUTDIR",LOGFILE="$LOGFILE" wrapper_tredparse.sh
+    qsub -pe smp 4 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTDIR="$OUTPUTDIR",LOGFILE="$LOGFILE" wrapper_tredparse.sh
 fi

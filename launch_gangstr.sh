@@ -11,10 +11,10 @@
 
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Creation Date : 20191104
-## last revision date : 20191104
+## last revision date : 20191117
 ## Known bugs : None
 
-INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
+INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/dijen017/dijen017.bam
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="/work/gad/shared/analyse/STR/GangSTR/$DATE"
 OUTPUTPREFIX="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE"
@@ -27,5 +27,5 @@ then
     INPUTFILE="$INPUTFILE" OUTPUTPREFIX="$OUTPUTPREFIX" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_gangstr.sh"
 else 
     mkdir -p "$OUTPUTDIR"
-    qsub -pe smp 1 -q transfer -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_gangstr.sh
+    qsub -pe smp 1 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_gangstr.sh
 fi

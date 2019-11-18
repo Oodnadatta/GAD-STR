@@ -14,7 +14,7 @@
 ## last revision date : 20191102
 ## Known bugs : None
 
-INPUTFILE=/archive/gad/shared/bam_new_genome_temp/dijen017.bam
+INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/dijen017/dijen017.bam
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="/work/gad/shared/analyse/STR/ExpansionHunter/$DATE"
 OUTPUTPREFIX="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE"
@@ -27,5 +27,5 @@ then
     INPUTFILE="$INPUTFILE" OUTPUTPREFIX="$OUTPUTPREFIX" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_expansionhunter.sh"
 else 
     mkdir -p "$OUTPUTDIR"
-    qsub -pe smp 1 -q transfer -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_expansionhunter.sh
+    qsub -pe smp 1 -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_expansionhunter.sh
 fi

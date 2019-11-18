@@ -50,8 +50,9 @@ echo "command : FIXME"
 /work/gad/shared/bin/hipstr/HipSTR-2019-11-04/HipSTR \
     --bams "$INPUTFILE" \
     --fasta /work/gad/shared/pipeline/hg19/index/hg19_essential.fa \
-    --regions /work/gad/shared/bin/hipstr/STRregions/hg19.hipstr_reference.bed \
     --str-vcf "$OUTPUTFILE"
+
+#    --regions /work/gad/shared/bin/hipstr/STRregions/hg19.hipstr_reference.bed
 
 hipstr_exitcode=$?
 
