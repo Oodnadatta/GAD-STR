@@ -11,10 +11,10 @@
 
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Creation Date : 20191103
-## last revision date : 20191103
+## last revision date : 20191126
 ## Known bugs : None
 
-INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/dijen017/dijen017.bam
+INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/offtargetdijen017/dijen017.offtarget.bam
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="/work/gad/shared/analyse/STR/Tredparse/$DATE"
 LOGFILE="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE.log"

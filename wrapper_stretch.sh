@@ -47,15 +47,13 @@ fi
 # Launch script command and check exit code
 echo "cd "$OUTPUTDIR"
 /work/gad/shared/bin/stretch/STRetch-20190602/tools/bin/bpipe \
-    run -p \
-    input_regions=/work/gad/shared/bin/stretch/STRetch-20190602/reference-data/hg19.STR_disease_loci.bed \
+    run -p input_regions=/work/gad/shared/bin/stretch/STRetch-20190602/reference-data/hg19.STR_disease_loci.bed \
     /work/gad/shared/bin/stretch/STRetch-20190602/pipelines/STRetch_wgs_bam_pipeline.groovy \
     "$INPUTFILE""
 
 cd "$OUTPUTDIR"
 /work/gad/shared/bin/stretch/STRetch-20190602/tools/bin/bpipe \
-    run -p
-    input_regions=/work/gad/shared/bin/stretch/STRetch-20190602/reference-data/hg19.STR_disease_loci.bed \
+    run -p input_regions=/work/gad/shared/bin/stretch/STRetch-20190602/reference-data/hg19.STR_disease_loci.bed \
     /work/gad/shared/bin/stretch/STRetch-20190602/pipelines/STRetch_wgs_bam_pipeline.groovy \
     "$INPUTFILE"
 

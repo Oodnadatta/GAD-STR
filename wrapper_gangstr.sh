@@ -11,7 +11,7 @@
 
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Creation Date : 20191104
-## last revision date : 20191104
+## last revision date : 20191127
 ## Known bugs : None
 
 
@@ -50,14 +50,19 @@ echo "command : /work/gad/shared/bin/gangstr/GangSTR-2.4/bin/GangSTR \
     --ref /work/gad/shared/pipeline/hg19/index/hg19_essential.fa \
     --regions /work/gad/shared/bin/gangstr/STRregions/hg19_ver13_1.bed \
     --out "$OUTPUTPREFIX" \
-    --verbose"
+    --verbose \
+    --insertmean "$INSERTMEAN" \
+    --insertsdev "$INSERTDEV""
 
 /work/gad/shared/bin/gangstr/GangSTR-2.4/bin/GangSTR \
     --bam "$INPUTFILE" \
     --ref /work/gad/shared/pipeline/hg19/index/hg19_essential.fa \
     --regions /work/gad/shared/bin/gangstr/STRregions/hg19_ver13_1.bed \
     --out "$OUTPUTPREFIX" \
-    --verbose
+    --verbose \
+    --insertmean "$INSERTMEAN" \
+    --insertsdev "$INSERTDEV"
+
 
 gangstr_exitcode=$?
 

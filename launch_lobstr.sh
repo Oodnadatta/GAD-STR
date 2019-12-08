@@ -14,7 +14,7 @@
 ## last revision date : 20191104
 ## Known bugs : None
 
-INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/dijen017/dijen017.bam
+INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/lobSTR/2019-11-18/dijen017.sorted.bam
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="/work/gad/shared/analyse/STR/LobSTR/$DATE"
 OUTPUTPREFIX="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE"
