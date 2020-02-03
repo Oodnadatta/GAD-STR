@@ -21,42 +21,57 @@ import sys
 
 path = '/work/gad/shared/analyse/STR/results2020-01-09'
 
-def display_console_graph(title, data):
+def display_console_graph(title, tools, data):
     print(title)
-    for x, y in data:
-        print(f'{x}\t{"*" * y}')
+    for tool, tool_data in zip(tools, data):
+        print(tool)
+        for x, y in tool_data:
+            print(f'{x}\t{"*" * y}')
 
-def display_html_graph(title, data):
+def display_html_graph(title, tools, data):
     import plotly.graph_objects as go
+    import plotly.subplots as sp
 
-    fig = go.Figure(
-        data=[go.Bar(
-            x=[x for (x, y) in data],
-            y=[y for (x, y) in data]
-        )],
-        layout_title_text=title
+    figure = sp.make_subplots(
+        rows=len(tools),
+        cols=1,
+        subplot_titles=tools
     )
 
-    print(fig.to_html())
+    for tool_id in range(len(tools)):
+        figure.add_trace(
+            go.Bar(
+                x=[x for (x, y) in data[tool_id]],
+                y=[y for (x, y) in data[tool_id]]
+            ),
+            row=tool_id + 1,
+            col=1
+        )
+
+    figure.update_layout(title_text=title, showlegend=False)
+
+    print(figure.to_html())
 
 def graph_locus(locus):
     title = f'Effectif pour chaque nombre de répétitions au locus {locus}'
+    data = []
     with open(f'{path}{os.sep}{locus}.tsv') as result_file:
         tsvreader = csv.reader(result_file, delimiter='\t')
         try:
-            next(tsvreader)
-            counter = collections.Counter()
-            counter[0] = 0
+            tools = next(tsvreader)[1:]
+            counters = [collections.Counter({0: 0}) for tool in tools]
             for row in tsvreader:
-                if row[1] not in ['.', 'nofile']:
-                    for count in row[1].split(','):
-                        counter[int(count)] += 1
+                for tool_id in range(len(tools)):
+                    if row[tool_id + 1] not in ['.', 'nofile']:
+                        for count in row[tool_id + 1].split(','):
+                            counters[tool_id][int(count)] += 1
         except StopIteration:
             print('Input file is empty', file=sys.stderr)
             sys.exit(1)
-        data = sorted(counter.items())
-        #display_console_graph(title, data)
-        display_html_graph(title, data)
+        for tool_id in range(len(tools)):
+            data.append(sorted(counters[tool_id].items()))
+        #display_console_graph(title, tools, data)
+        display_html_graph(title, tools, data)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
