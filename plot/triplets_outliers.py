@@ -42,7 +42,8 @@ def display_outliers(locus, limits):
     #         'tool': {
     #             'Limit': 42,
     #             '5 %': 42,
-    #             'Z score': 42
+    #             'Z score': 42,
+    #             '< 3': 2
     #         }
     #     }
     # }
@@ -62,11 +63,16 @@ def display_outliers(locus, limits):
                     results[dijen][tool]['Limit'] = '.'
                     results[dijen][tool]['5 %'] = tool_value
                     results[dijen][tool]['Z score'] = tool_value
+                    results[dijen][tool]['< 3'] = '.'
+
+                    # > upper limit of normality or < 3
                     if tool_value != '.':
                         # count: number of repeats from the input file
                         for count in tool_value.split(','):
                             if count != '.':
                                 tools_values[tool].append(int(count))
+                                if int(count) < 3:
+                                    results[dijen][tool]['< 3'] = tool_value
                                 if locus in limits:
                                     if int(count) > limits[locus]:
                                         results[dijen][tool]['Limit'] = tool_value
@@ -111,7 +117,7 @@ def display_outliers(locus, limits):
                             zscore_outliers.append('.')
                         else:
                             zscore_outliers.append(f'{zscore:.3f}')
-                            if zscore >= 1.5:
+                            if zscore >= 2.0:
                                 actual_outlier = True
                 if actual_outlier:
                     dijen_outliers[tool]['Z score'] = ','.join(zscore_outliers)
@@ -119,8 +125,8 @@ def display_outliers(locus, limits):
                     dijen_outliers[tool]['Z score'] = '.'
 
     # Output
-    print('dijen\tEH\tEH\tEH\tTred\tTred\tTred\tGangSTR\tGangSTR\tGangSTR')
-    print('\tLimit\t5 %\tZ score' * 3)
+    print('dijen\tEH\tEH\tEH\tEH\tTred\tTred\tTred\tTred\tGangSTR\tGangSTR\tGangSTR\tGangSTR')
+    print('\tLimit\t5 %\tZ score\t< 3' * 3)
     for dijen, dijen_outliers in results.items():
         all_outliers = [dijen]
         dijen_has_outliers = False
