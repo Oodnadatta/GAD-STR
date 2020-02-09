@@ -111,8 +111,8 @@ def display_outliers(locus, limits):
                             zscore_outliers.append('.')
                         else:
                             zscore_outliers.append(f'{zscore:.3f}')
-                        if True: #zscore > 2:
-                            actual_outlier = True
+                            if zscore >= 1.5:
+                                actual_outlier = True
                 if actual_outlier:
                     dijen_outliers[tool]['Z score'] = ','.join(zscore_outliers)
                 else:
@@ -126,7 +126,9 @@ def display_outliers(locus, limits):
         dijen_has_outliers = False
         for tool, tool_outliers in dijen_outliers.items():
             if tool_outliers:
-                dijen_has_outliers = True
+                for tool_outlier_value in tool_outliers.values():
+                    if tool_outlier_value != '.':
+                        dijen_has_outliers = True
                 all_outliers.extend(tool_outliers.values())
             else:
                 all_outliers.append('.')
