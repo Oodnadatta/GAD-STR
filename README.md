@@ -10,7 +10,9 @@
 2. Specify output file in launch_pipeline.sh
    Warning, don't overwrite existing files
 3. Launch launch_pipeline.sh
+
    `nohup ./launch_pipeline.sh &`
+
    Dependencies :
    - genomes.list
    - pipeline.sh
