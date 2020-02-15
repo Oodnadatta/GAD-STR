@@ -16,11 +16,6 @@ Description: How to launch scripts to get STR genotype from genomes on all the l
    Dependencies :
    - genomes.list
    - pipeline.sh
-   - launch_ehdn.sh
-   - launch_expansionhunter.sh
-   - launch_gangstr.sh
-   - launch_transfer.sh
-   - launch_tredparse.sh
    - wrapper_delete.sh
    - wrapper_ehdn.sh
    - wrapper_expansionhunter.sh
