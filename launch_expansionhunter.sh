@@ -14,7 +14,7 @@
 ## last revision date : 20191126
 ## Known bugs : None
 
-INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/offtargetdijen017/dijen017.offtarget.bam
+INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen561.bam
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="/work/gad/shared/analyse/STR/ExpansionHunter/$DATE"
 OUTPUTPREFIX="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE"
