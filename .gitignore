@@ -1,11 +1,13 @@
 *~
 *.bam
 *.bai
-*.vcf
-*.json
-*.sh.o*
-*.sh.po*
 *dijen*.o*
 *dijen*.po*
 *.failed
+*.json
+*.log
+*.out
+*.sh.o*
+*.sh.po*
+*.vcf
 #*#
