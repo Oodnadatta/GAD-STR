@@ -5,5 +5,7 @@
 *.json
 *.sh.o*
 *.sh.po*
+*dijen*.o*
+*dijen*.po*
 *.failed
 #*#
