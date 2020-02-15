@@ -11,11 +11,11 @@
 
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Creation Date : 20191208
-## last revision date : 20191208
+## last revision date : 20200215
 ## Known bugs : None
 
 /work/gad/shared/bin/parallel/parallel-20150522-1.el7.cern/bin/parallel \
-    --jobs 10 \
+    --jobs 16 \
     --line-buffer \
     "$(dirname "$0")/pipeline.sh" \
     < genomes.list
