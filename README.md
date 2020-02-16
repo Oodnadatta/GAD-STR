@@ -17,4 +17,4 @@
    - `wrapper_gangstre.sh`
    - `wrapper_transfer.sh`
    - `wrapper_tredparse.sh`
-4. Launch `getResults.py`
+4. Launch `getResults.py`. Warning, don't overwrite existing files.
