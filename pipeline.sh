@@ -51,4 +51,4 @@ mkdir -p "$OUTPUTDIR/ehdn"
 qsub -pe smp 4 -q batch -N "ehdn_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/ehdn/$SAMPLE",LOGFILE="$OUTPUTDIR/ehdn/$DATE.log" wrapper_ehdn.sh
 
 # Delete transfered bam and bai
-qsub -pe smp 1 -q batch -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -v SAMPLE="$SAMPLE",LOGFILE="$OUTPUTDIR/delete_$DATE.log" wrapper_delete.sh
+qsub -pe smp 1 -q batch -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -v SAMPLE="$SAMPLE",LOGFILE="$OUTPUTDIR/delete_$DATE.log" wrapper_delete.sh
