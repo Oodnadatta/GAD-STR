@@ -8,7 +8,7 @@
 
 1. Create `genomes.list`
 2. Specify output file in `launch_pipeline.sh`. Warning, don't overwrite existing files
-3. Launch launch_pipeline.sh : `nohup ./launch_pipeline.sh &`. Dependencies :
+3. Launch `launch_pipeline.sh`: `nohup ./launch_pipeline.sh &`. Dependencies:
    - `genomes.list`
    - `pipeline.sh`
    - `wrapper_delete.sh`
@@ -18,3 +18,9 @@
    - `wrapper_transfer.sh`
    - `wrapper_tredparse.sh`
 4. Launch `getResults.py`. Warning, don't overwrite existing files.
+5. Specify input directory in `triplets_plotly.py` and in `launch_triplets_plotly.sh`.
+6. Launch `launch_triplets_plotly.sh`.
+7. Specify input directory in `triplets_outliers.py` and in `launch_triplets_outliers.sh`.
+8. Change z-score threshold if necessary in `triplets_outliers.py`.
+9. Launch `launch_triplets_outliers.sh`. Dependency: `patho.csv`.
+10. Get files (i.e.: `scp 'an1770de@ssh-ccub.u-bourgogne.fr:/work/gad/shared/analyse/STR/results/*' .`)
