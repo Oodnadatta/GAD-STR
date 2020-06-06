@@ -31,7 +31,6 @@ if [ ! -f "$INPUTFILE" ]
 then
     echo "Input file '$INPUTFILE' does not exist"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch strscan.failed
     exit 1
 fi
 
@@ -40,7 +39,6 @@ if [ -z "$OUTPUTPREFIX" ]
 then
     echo "Output prefix is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch strscan.failed
     exit 1
 fi
 
@@ -61,7 +59,6 @@ echo "strscan exit code : $strscan_exitcode"
 if [ $strscan_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch gangstr.failed
     exit 1
 fi
 

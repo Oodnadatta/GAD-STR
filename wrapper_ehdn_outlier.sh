@@ -27,7 +27,6 @@ if [ -z "$CASE" ]
 then
     echo "Dijen is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch ehdn_outlier.failed
     exit 1
 fi
 
@@ -53,7 +52,6 @@ echo "ehdn_outlier exit code : $ehdn_outlier_exitcode"
 if [ $ehdn_outlier_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch ehdn_outlier.failed
     exit 1
 fi
 
@@ -69,7 +67,6 @@ echo "ehdn_outlier exit code : $ehdn_outlier_exitcode"
 if [ $ehdn_outlier_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch ehdn_outlier.failed
     exit 1
 fi
 
@@ -85,7 +82,6 @@ echo "ehdn_outlier exit code : $ehdn_outlier_exitcode"
 if [ $ehdn_outlier_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch ehdn_outlier.failed
     exit 1
 fi
 
@@ -102,7 +98,6 @@ echo "ehdn_outlier exit code : $ehdn_outlier_exitcode"
 if [ $ehdn_outlier_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch ehdn_outlier.failed
     exit 1
 fi
 

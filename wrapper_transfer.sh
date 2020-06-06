@@ -24,7 +24,6 @@ if [ ! -f "$INPUTFILE" ]
 then
     echo "Input file '$INPUTFILE' does not exist"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch transfer.failed
     exit 1
 fi
 
@@ -33,7 +32,6 @@ if [ -z "$OUTPUTDIR" ]
 then
     echo "Output directory is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch transfer.failed
     exit 1
 fi
 
@@ -51,7 +49,6 @@ echo "transfer exit code : $transfer_exitcode"
 if [ $transfer_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch transfer.failed
     exit 1
 fi
 

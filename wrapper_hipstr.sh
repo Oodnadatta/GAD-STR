@@ -31,7 +31,6 @@ if [ ! -f "$INPUTFILE" ]
 then
     echo "Input file '$INPUTFILE' does not exist"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch hipstr.failed
     exit 1
 fi
 
@@ -40,7 +39,6 @@ if [ -z "$OUTPUTFILE" ]
 then
     echo "Output file is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch hipstr.failed
     exit 1
 fi
 
@@ -60,7 +58,6 @@ echo "hipstr exit code : $hipstr_exitcode"
 if [ $hipstr_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch hipstr.failed
     exit 1
 fi
 

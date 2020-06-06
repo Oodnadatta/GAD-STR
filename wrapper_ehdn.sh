@@ -24,7 +24,6 @@ if [ ! -f "$INPUTFILE" ]
 then
     echo "Input file '$INPUTFILE' does not exist"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch ehdn.failed
     exit 1
 fi
 
@@ -33,7 +32,6 @@ if [ -z "$OUTPUTPREFIX" ]
 then
     echo "Output prefix is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch ehdn.failed
     exit 1
 fi
 
@@ -67,7 +65,6 @@ echo "ehdn exit code : $ehdn_exitcode"
 if [ $ehdn_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch ehdn.failed
     exit 1
 fi
 

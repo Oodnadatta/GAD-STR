@@ -23,7 +23,6 @@ if [ -z "$SAMPLE" ]
 then
     echo "Sample is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch delete.failed
     exit 1
 fi
 
@@ -40,7 +39,6 @@ echo "delete exit code : $delete_exitcode"
 if [ $delete_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch delete.failed
     exit 1
 fi
 

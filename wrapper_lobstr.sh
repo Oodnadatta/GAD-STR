@@ -31,7 +31,6 @@ if [ ! -f "$INPUTFILE" ]
 then
     echo "Input file '$INPUTFILE' does not exist"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch lobstr.failed
     exit 1
 fi
 
@@ -40,7 +39,6 @@ if [ -z "$OUTPUTPREFIX" ]
 then
     echo "Output prefix is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch lobstr.failed
     exit 1
 fi
 
@@ -70,7 +68,6 @@ echo "lobstr exit code : $lobstr_exitcode"
 if [ $lobstr_exitcode != 0 ]
 then
     echo "$(date +"%F_%H-%M-%S"): END"
-    touch lobstr.failed
     exit 1
 fi
 
