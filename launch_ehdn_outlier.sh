@@ -2,16 +2,10 @@
 
 ### ASDP PIPELINE ###
 ## Version: 0.0.1
-## Licence: FIXME
-## Description: script to launch the wrapper for qsubing outlier analysis by ExpansionHunter denovo script for STR detection
-## Usage: FIXME
-## Output: FIXME
-## Requirements: FIXME
-
+## Licence: AGPLv3
 ## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date: 20200215
-## Last revision date: 20200215
-## Known bugs: None
+## Description: script to launch the wrapper for qsubing outlier analysis by ExpansionHunter denovo script for STR detection
+
 
 CASE="$1"
 DATE="$(date +"%F_%H-%M-%S")"

@@ -2,16 +2,10 @@
 
 ### ASDP PIPELINE ###
 ## Version: 0.0.1
-## Licence: FIXME
-## Description: script to generate automatically a manifest and multisampleprofile in a tsv format, then do outlier analyses for a single patient
-## Usage: FIXME
-## Output: FIXME
-## Requirements: FIXME
-
+## Licence: AGPLv3
 ## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date: 20200215
-## Last revision date: 20200215
-## Known bugs: None
+## Description: script to generate automatically a manifest and multisampleprofile in a tsv format, then do outlier analyses for a single patient
+
 
 EHDN="/work/gad/shared/bin/expansionhunterdenovo/ExpansionHunterDenovo-v0.8.0-linux_x86_64/bin/ExpansionHunterDenovo-v0.8.0"
 EHDN_OUTLIER="/work/gad/shared/bin/expansionhunterdenovo/ExpansionHunterDenovo-v0.8.0-linux_x86_64/scripts/outlier.py"

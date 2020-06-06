@@ -1,18 +1,11 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## wrapper_expansionhunter.sh
-## Version : 0.0.1
-## Licence : FIXME
-## Description : a wrapper for qsubing ExpansionHunter script for STR detection
-## Usage : qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTPREFIX=<output prefix>,[LOGFILE=<path to the log file>] wrapper_expansionhunter.sh
-## Output : FIXME
-## Requirements : FIXME
-
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191102
-## last revision date : 20191102
-## Known bugs : None
+## Version: 0.0.1
+## Licence: AGPLv3
+## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Description: a wrapper for qsubing ExpansionHunter script for STR detection
+## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTPREFIX=<output prefix>,[LOGFILE=<path to the log file>] wrapper_expansionhunter.sh
 
 
 # Log file path option

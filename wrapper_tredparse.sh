@@ -1,18 +1,11 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## wrapper_tredparse.sh
-## Version : 0.0.1
-## Licence : FIXME
-## Description : a wrapper for qsubing Tredparse script for STR detection
-## Usage : qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTDIR=<output directory>,[LOGFILE=<path to the log file>] wrapper_tredparse.sh
-## Output : FIXME
-## Requirements : FIXME
-
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191103
-## last revision date : 20191103
-## Known bugs : None
+## Version: 0.0.1
+## Licence: AGPLv3
+## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Description: a wrapper for qsubing Tredparse script for STR detection
+## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTDIR=<output directory>,[LOGFILE=<path to the log file>] wrapper_tredparse.sh
 
 
 # Log file path option

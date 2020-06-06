@@ -1,18 +1,12 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## launch_wrapper_tredparse.sh
-## Version : 0.0.1
-## Licence : FIXME
-## Description : script to launch the wrapper for qsubing Tredparse script for STR detection
-## Usage : FIXME
-## Output : FIXME
-## Requirements : FIXME
-
+## Version: 0.0.1
+## Licence: AGPLv3
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191103
-## last revision date : 20191126
-## Known bugs : None
+## Description: script to launch the wrapper for qsubing Tredparse script for STR detection
+
+
 
 INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen561.bam
 DATE="$(date +"%F_%H-%M-%S")"

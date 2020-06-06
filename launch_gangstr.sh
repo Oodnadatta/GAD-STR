@@ -1,18 +1,11 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## launch_wrapper_gangstr.sh
-## Version : 0.0.1
-## Licence : FIXME
-## Description : script to launch the wrapper for qsubing GangSTR script for STR detection
-## Usage : FIXME
-## Output : FIXME
-## Requirements : FIXME
+## Version: 0.0.1
+## Licence: AGPLv3
+## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Description: script to launch the wrapper for qsubing GangSTR script for STR detection
 
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191104
-## last revision date : 20191126
-## Known bugs : None
 
 INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/offtargetdijen017/dijen017.offtarget.bam
 DATE="$(date +"%F_%H-%M-%S")"

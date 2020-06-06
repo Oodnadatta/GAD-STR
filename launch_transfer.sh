@@ -1,18 +1,11 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## launch_wrapper_transfer.sh
-## Version : 0.0.1
-## Licence : FIXME
-## Description : script to launch the wrapper for qsubing ExpansionHunter denovo script for STR detection
-## Usage : 
-## Output : FIXME
-## Requirements : FIXME
-
+## Version: 0.0.1
+## Licence: AGPLv3
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191102
-## last revision date : 20191126
-## Known bugs : None
+## Description: script to launch the wrapper for qsubing ExpansionHunter denovo script for STR detection
+
 
 INPUTFILE="/archive/gad/shared/bam_new_genome_temp/dijen016.bam"
 DATE="$(date +"%F_%H-%M-%S")"

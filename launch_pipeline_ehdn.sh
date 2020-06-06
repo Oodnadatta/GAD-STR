@@ -2,16 +2,10 @@
 
 ### ASDP PIPELINE ###
 ## Version: 0.0.1
-## Licence: FIXME
-## Description : script to launch the pipeline for STR detection with EHDN outlier
-## Usage : 
-## Output : FIXME
-## Requirements : FIXME
-
+## Licence: AGPLv3
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20200215
-## last revision date : 20200215
-## Known bugs : None
+## Description : script to launch the pipeline for STR detection with EHDN outlier
+
 
 LAUNCHER="$(readlink -f "$(dirname "$0")/launch_ehdn_outlier.sh")"
 

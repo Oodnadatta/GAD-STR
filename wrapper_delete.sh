@@ -1,18 +1,11 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## wrapper_delete.sh
-## Version : 0.0.1
-## Licence : FIXME
-## Description : a wrapper for qsubing bam deletion for STR pipeline
-## Usage : qsub -pe smp 1 -v SAMPLE=<sample>,[LOGFILE=<path to the log file>] wrapper_delete.sh
-## Output : FIXME
-## Requirements : FIXME
-
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191208
-## last revision date : 20191208
-## Known bugs : None
+## Version: 0.0.1
+## Licence: AGPLV3
+## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Description: a wrapper for qsubing bam deletion for STR pipeline
+## Usage: qsub -pe smp 1 -v SAMPLE=<sample>,[LOGFILE=<path to the log file>] wrapper_delete.sh
 
 
 # Log file path option

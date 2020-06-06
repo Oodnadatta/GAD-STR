@@ -1,18 +1,11 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## launch_wrapper_ehdn.sh
-## Version : 0.0.1
-## Licence : FIXME
-## Description : script to launch the wrapper for qsubing ExpansionHunter denovo script for STR detection
-## Usage : 
-## Output : FIXME
-## Requirements : FIXME
+## Version: 0.0.1
+## Licence: AGPLv3
+## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Description: script to launch the wrapper for qsubing ExpansionHunter denovo script for STR detection
 
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191102
-## last revision date : 20191126
-## Known bugs : None
 
 INPUTFILE=/work/gad/shared/analyse/STR/pipeline/dijen073/dijen073.bam
 DATE="$(date +"%F_%H-%M-%S")"

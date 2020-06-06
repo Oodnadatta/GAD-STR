@@ -1,14 +1,11 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## Version : 0.0.1
-## Licence : FIXME
-## Description : script to launch the pipeline for STR detection
-## Usage : 
+## Version: 0.0.1
+## Licence: AGPLV3
+## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Description: script to launch the pipeline for STR detection
 
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191208
-## last revision date : 20200606
 
 # $1 : first argument in the command line : the input file
 SAMPLE="$1"
