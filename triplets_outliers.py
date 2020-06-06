@@ -11,16 +11,22 @@
 
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Creation Date : 20200202
-## last revision date : 20200202
+## last revision date : 20200216
 ## Known bugs : None
 
 import collections
 import csv
+import math
 import os
 import scipy.stats
 import sys
 
-path = '/work/gad/shared/analyse/STR/results2020-01-09'
+path = '/work/gad/shared/analyse/STR/results'
+zscore_threshold = 4
+zscore_label = f'Z>={zscore_threshold}'
+percentile_threshold = 1.0
+percentile_label = f'{percentile_threshold}%'
+
 
 def load_limits():
     limits = {}
@@ -61,8 +67,8 @@ def display_outliers(locus, limits):
                     tools_values.setdefault(tool, [])
                     results[dijen][tool] = collections.OrderedDict()
                     results[dijen][tool]['Limit'] = '.'
-                    results[dijen][tool]['5 %'] = tool_value
-                    results[dijen][tool]['Z score'] = tool_value
+                    results[dijen][tool][percentile_label] = tool_value
+                    results[dijen][tool][zscore_label] = tool_value
                     results[dijen][tool]['< 3'] = '.'
 
                     # > upper limit of normality or < 3
@@ -83,21 +89,22 @@ def display_outliers(locus, limits):
             print('Input file is empty', file=sys.stderr)
             sys.exit(1)
 
-    # 5 % limit
+    # outlier threshold (exemple: 5%)
     for tool, tool_values in tools_values.items():
+        # Test if there is at least one value given by the tool
         if tool_values:
-            tool_5p_limit = sorted(tool_values)[-len(tool_values)//20:][0]
+            tool_percentile_limit = sorted(tool_values)[-math.ceil(len(tool_values) * percentile_threshold / 100):][0]
             for dijen, dijen_outliers in results.items():
-                tool_5p_outliers = dijen_outliers[tool]['5 %']
+                tool_percentile_outliers = dijen_outliers[tool][percentile_label]
                 actual_outlier = False
                 # count: number of repeats from the input file
-                for count in tool_5p_outliers.split(','):
+                for count in tool_percentile_outliers.split(','):
                     if count != '.':
-                        if int(count) >= tool_5p_limit:
+                        if int(count) >= tool_percentile_limit:
                             actual_outlier = True
                             break
                 if not actual_outlier:
-                    dijen_outliers[tool]['5 %'] = '.'
+                    dijen_outliers[tool][percentile_label] = '.'
 
     # Z score
     for tool, tool_values in tools_values.items():
@@ -110,23 +117,23 @@ def display_outliers(locus, limits):
                 actual_outlier = False
                 zscore_outliers = []
                 # count: number of repeats from the input file                
-                for count in dijen_outliers[tool]['Z score'].split(','):
+                for count in dijen_outliers[tool][zscore_label].split(','):
                     if count != '.':
                         zscore = next(zscores)
                         if zscore == '.':
                             zscore_outliers.append('.')
                         else:
                             zscore_outliers.append(f'{zscore:.3f}')
-                            if zscore >= 2.0:
+                            if zscore >= zscore_threshold:
                                 actual_outlier = True
                 if actual_outlier:
-                    dijen_outliers[tool]['Z score'] = ','.join(zscore_outliers)
+                    dijen_outliers[tool][zscore_label] = ','.join(zscore_outliers)
                 else:
-                    dijen_outliers[tool]['Z score'] = '.'
+                    dijen_outliers[tool][zscore_label] = '.'
 
     # Output
     print('dijen\tEH\tEH\tEH\tEH\tTred\tTred\tTred\tTred\tGangSTR\tGangSTR\tGangSTR\tGangSTR')
-    print('\tLimit\t5 %\tZ score\t< 3' * 3)
+    print(f'\tLimit\t{percentile_label}\t{zscore_label}\t< 3' * 3)
     for dijen, dijen_outliers in results.items():
         all_outliers = [dijen]
         dijen_has_outliers = False

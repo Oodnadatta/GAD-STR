@@ -19,7 +19,7 @@ import csv
 import os
 import sys
 
-path = '/work/gad/shared/analyse/STR/results2020-01-09'
+path = '/work/gad/shared/analyse/STR/results'
 
 def display_console_graph(title, tools, data):
     print(title)

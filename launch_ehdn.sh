@@ -14,7 +14,7 @@
 ## last revision date : 20191126
 ## Known bugs : None
 
-INPUTFILE=/work/gad/shared/analyse/STR/Data/dijen017/dijen017/dijen017.bam
+INPUTFILE=/work/gad/shared/analyse/STR/pipeline/dijen073/dijen073.bam
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="/work/gad/shared/analyse/STR/ExpansionHunterDeNovo/$DATE"
 OUTPUTPREFIX="$OUTPUTDIR/$(basename "$INPUTFILE")_$DATE"

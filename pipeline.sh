@@ -1,19 +1,16 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## pipeline.sh
 ## Version : 0.0.1
 ## Licence : FIXME
 ## Description : script to launch the pipeline for STR detection
 ## Usage : 
-## Output : FIXME
-## Requirements : FIXME
 
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Creation Date : 20191208
-## last revision date : 20191208
-## Known bugs : None
+## last revision date : 20200606
 
+# $1 : first argument in the command line : the input file
 SAMPLE="$1"
 
 # Check if sample is specified

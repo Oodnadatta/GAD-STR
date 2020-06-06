@@ -2,7 +2,7 @@
 
 SCRIPT="$(dirname "$(readlink -f "$0")")/triplets_plotly.py"
 
-cd '/work/gad/shared/analyse/STR/results2020-01-09' || exit 1
+cd '/work/gad/shared/analyse/STR/results' || exit 1
 for locus_tsv in *.tsv; do
     locus="$(basename "$locus_tsv" ".tsv")"
     echo "Processing $locus" >&2
