@@ -7,7 +7,7 @@
 ## Description: script to generate automatically a manifest and multisampleprofile in a tsv format, then do outlier analyses for a single patient
 
 # Source the configuration file
-. "$(dirname "$0")/config.sh"
+. ./config.sh
 
 # Logging
 LOGFILE="$OUTPUTDIR/$CASE/ehdn/$CASE.ehdn_outlier.$(date +"%F_%H-%M-%S").log"

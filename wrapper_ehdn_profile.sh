@@ -8,7 +8,7 @@
 ## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTPREFIX=<output prefix>,[LOGFILE=<path to the log file>] wrapper_ehdn_profile.sh
 
 # Source the configuration file
-. "$(dirname "$0")/config.sh"
+. ./config.sh
 
 # Log file path option
 if [ -z "$LOGFILE" ]

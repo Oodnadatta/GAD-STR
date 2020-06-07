@@ -11,5 +11,5 @@
 
 CASE="$1"
 
-qsub -pe smp 1 -q "$COMPUTE_QUEUE" -N "ehdn_outlier_$CASE" -sync y -v CASE="$CASE" "$(dirname "$0")/wrapper_ehdn_outlier.sh"
+qsub -wd "$(dirname "$(readlink -f "$0")")" -pe smp 1 -q "$COMPUTE_QUEUE" -N "ehdn_outlier_$CASE" -sync y -v CASE="$CASE" wrapper_ehdn_outlier.sh
 

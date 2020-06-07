@@ -5,10 +5,10 @@
 ## Licence: AGPLv3
 ## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Description: a wrapper for qsubing Tredparse script for STR detection
-## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTDIR=<output directory>,[LOGFILE=<path to the log file>] wrapper_tredparse.sh
+## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,TREDPARSE_OUTPUTDIR=<output directory>,[LOGFILE=<path to the log file>] wrapper_tredparse.sh
 
 # Source the configuration file
-. "$(dirname "$0")/config.sh"
+. ./config.sh
 
 # Log file path option
 if [ -z "$LOGFILE" ]
@@ -30,7 +30,7 @@ then
 fi
 
 # Check if output prefix is specified
-if [ -z "$OUTPUTDIR" ]
+if [ -z "$TREDPARSE_OUTPUTDIR" ]
 then
     echo "Output directory is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
@@ -44,8 +44,8 @@ then
 fi
 
 # Launch script command and check exit code
-echo "command : $TREDPARSE $INPUTFILE --workdir $OUTPUTDIR --ref hg19"
-"$TREDPARSE" "$INPUTFILE" --workdir "$OUTPUTDIR" --ref hg19
+echo "command : $TREDPARSE $INPUTFILE --workdir $TREDPARSE_OUTPUTDIR --ref hg19"
+"$TREDPARSE" "$INPUTFILE" --workdir "$TREDPARSE_OUTPUTDIR" --ref hg19
 
 tredparse_exitcode=$?
 

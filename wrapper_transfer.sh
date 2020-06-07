@@ -5,7 +5,7 @@
 ## Licence: AGPLv3
 ## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Description: a wrapper for qsubing bam transfer for STR pipeline
-## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTDIR=<output directory>,[LOGFILE=<path to the log file>] wrapper_transfer.sh
+## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,TRANSFER_OUTPUTDIR=<output directory>,[LOGFILE=<path to the log file>] wrapper_transfer.sh
 
 
 # Log file path option
@@ -28,7 +28,7 @@ then
 fi
 
 # Check if output directory is specified
-if [ -z "$OUTPUTDIR" ]
+if [ -z "$TRANSFER_OUTPUTDIR" ]
 then
     echo "Output directory is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
@@ -36,12 +36,12 @@ then
 fi
 
 # Transfer and check exit code
-echo "command : rsync -aAX \
+echo "command : rsync -aX \
     $INPUTFILE $(echo "$INPUTFILE" | sed 's/\.bam$/.bai/') \
-    $OUTPUTDIR"
-rsync -aAX \
+    $TRANSFER_OUTPUTDIR"
+rsync -aX \
     "$INPUTFILE" "$(echo "$INPUTFILE" | sed 's/\.bam$/.bai/')" \
-    "$OUTPUTDIR"
+    "$TRANSFER_OUTPUTDIR"
 
 transfer_exitcode=$? 
 
