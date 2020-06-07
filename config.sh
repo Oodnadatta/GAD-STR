@@ -8,6 +8,7 @@
 
 INPUTDIR="/archive/gad/shared/bam_new_genome_temp"
 OUTPUTDIR="/work/gad/shared/analyse/STR/pipeline"
+RESULTS_OUTPUTDIR="/work/gad/shared/analyse/STR/results" # for getResults.py, Plotly and outliers tables
 
 # Valid values: "sge"
 INFRA=sge
@@ -33,8 +34,11 @@ GANGSTR_REGIONS="/work/gad/shared/bin/gangstr/STRregions/hg19_ver13_1.bed"
 EHDN="/work/gad/shared/bin/expansionhunterdenovo/ExpansionHunterDenovo-v0.8.0-linux_x86_64/bin/ExpansionHunterDenovo-v0.8.0"
 EHDN_OUTLIER="/work/gad/shared/bin/expansionhunterdenovo/ExpansionHunterDenovo-v0.8.0-linux_x86_64/scripts/outlier.py"
 
-
 REF="/work/gad/shared/pipeline/hg19/index/hg19_essential.fa"
+
+# Outliers
+ZSCORE_THRESHOLD=4.0
+PERCENTILE_THRESHOLD=1.0
 
 
 

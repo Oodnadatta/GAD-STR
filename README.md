@@ -9,6 +9,7 @@
 1. Create `samples.list`
 2. Fill the configuration file `config.sh`. Warning, don't overwrite existing files
 3. Launch `launch_pipeline.sh` : `nohup ./launch_pipeline.sh samples.list &`. Dependencies :
+   - `config.sh`
    - `samples.list`
    - `pipeline.sh`
    - `wrapper_delete.sh`
@@ -17,13 +18,11 @@
    - `wrapper_gangstr.sh`
    - `wrapper_transfer.sh`
    - `wrapper_tredparse.sh`
-4. Launch `getResults.py`. Warning, don't overwrite existing files.
-5. Specify input directory in `str_plotly.py` and in `launch_str_plotly.sh`.
+4. Launch `launch_pipeline_ehdn_outlier.sh` : `nohup ./launch_pipeline_ehdn_outlier.sh &`. Dependencies :
+   - `config.sh`
+   - `pipeline_ehdn_outlier.sh`
+   - `wrapper_ehdn_outlier.sh`
+5. Launch `getResults.py`. Warning, don't overwrite existing files.
 6. Launch `launch_str_plotly.sh`.
-7. Specify input directory in `str_outliers.py` and in `launch_str_outliers.sh`.
-8. Change z-score threshold if necessary in `str_outliers.py`.
-9. Launch `launch_str_outliers.sh`. Dependency: `patho.csv`.
+7. Change z-score threshold if necessary in `config.sh`. Launch `launch_str_outliers.sh`. Dependency: `patho.csv`.
 10. Get files (i.e.: `scp 'an1770de@ssh-ccub.u-bourgogne.fr:/work/gad/shared/analyse/STR/results/*' .`)
-
-
-Dans doc : préciser que le répertoire input doit être différent du répertoire d'output (précaution pour éviter de supprimer données brutes)

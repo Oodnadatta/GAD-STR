@@ -3,8 +3,12 @@
   - [ ] Ajouter dans la doc que Tred doit être ouvert dans virtual
   - [ ] Mode transfert
   - [ ] Préciser qu'il ne faut rien ajouter manuellement dans les répertoires de OUTPUTDIR (car EHDN travaille sur tous les répertoires présents dans OUTPUTDIR, uniquement samples)
+  - [ ] Préciser que le répertoire input doit être différent du répertoire d'output (précaution pour éviter de supprimer\ données brutes)
+  - [ ] Dépendances : Plotly pour str_plotly.py et Scipy pour str_outliers.py, Python 3
 - [ ] EHDN
   - [ ] Brancher EHDN et outlier
   - [ ] Séparer case et contrôles
   - [ ] Ajouter EHDN dans GetResults
 - [ ] Ajouter le sample dans le nom de fichier de log
+- [ ] Changer le répertoire de sortie : /STR/pipeline car pipeline n'est pas explicite (répertoire avec fichiers de sortie des outils de détection de STR)
+- [ ] Remove dijen from str_outliers.py

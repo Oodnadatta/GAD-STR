@@ -1,24 +1,30 @@
 #! /usr/bin/env python3
 
 ### ASDP PIPELINE ###
-## Version : 0.0.1
-## Licence : FIXME
-## Description : script to get automatically graphics from expansion pipeline results from getResults.py with Plotly
-## Usage :
-## Output : FIXME
-## Requirements : FIXME
-
+## Version: 0.0.1
+## Licence: AGPLv3
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20200202
-## last revision date : 20200202
-## Known bugs : None
+## Description: script to get automatically graphics from expansion pipeline results from getResults.py with Plotly
 
 import collections
 import csv
+import logging
 import os
+import os.path
 import sys
 
-path = '/work/gad/shared/analyse/STR/results'
+output_directory = None
+
+with open(os.path.join(os.path.dirname(sys.argv[0]), 'config.sh'))) as config:
+    for line in config:
+        if '=' in line:
+            variable, value = line.split('=', 1)
+            elif variable == 'RESULTS_OUTPUTDIR':
+                output_directory = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
+
+if output_directory is None
+    logging.error('RESULTS_OUTPUTDIR is missing in config.sh')
+    sys.exit(1)
 
 def display_console_graph(title, tools, data):
     print(title)
@@ -54,7 +60,7 @@ def display_html_graph(title, tools, data):
 def graph_locus(locus):
     title = f'Effectif pour chaque nombre de répétitions au locus {locus}'
     data = []
-    with open(f'{path}{os.sep}{locus}.tsv') as result_file:
+    with open(f'{output_directory}{os.sep}{locus}.tsv') as result_file:
         tsvreader = csv.reader(result_file, delimiter='\t')
         try:
             tools = next(tsvreader)[1:]

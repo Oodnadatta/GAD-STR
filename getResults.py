@@ -2,17 +2,10 @@
 
 ### ASDP PIPELINE ###
 ## getResults.py
-## Version : 0.0.1
-## Licence : FIXME
-## Description : script to get automatically results from pipeline.sh script in a tsv format on all the locus
-## Usage : 
-## Output : FIXME
-## Requirements : FIXME
-
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191215
-## last revision date : 20191217
-## Known bugs : None
+## Version: 0.0.1
+## Licence: AGPLv3
+## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Description: script to get automatically results from pipeline.sh script in a tsv format on all the locus
 
 import glob
 import gzip
@@ -21,10 +14,26 @@ import logging
 import os
 import os.path
 import re
+import sys
 
-variants_catalog = '/work/gad/shared/bin/expansionhunter/ExpansionHunter-v3.1.2-linux_x86_64/variant_catalog/hg19/variant_catalog.json'
-input_directory ='/work/gad/shared/analyse/STR/pipeline/'
-output_directory ='/work/gad/shared/analyse/STR/results/'
+input_directory = None
+output_directory = None
+variant_catalog = None
+
+with open(os.path.join(os.path.dirname(sys.argv[0]), 'config.sh'))) as config:
+    for line in config:
+        if '=' in line:
+            variable, value = line.split('=', 1)
+            if variable == 'OUTPUTDIR':
+                input_directory = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
+            elif variable == 'RESULTS_OUTPUTDIR':
+                output_directory = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
+            elif variable == 'EH_VARIANT_CATALOG':
+                variant_catalog = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
+
+if input_directory is None or output_directory is None or variant_catalog is None:
+    logging.error('OUTPUTDIR, RESULTS_OUTPUTDIR or EH_VARIANT_CATALOG is missing in config.sh')
+    sys.exit(1)
 
 genotype = re.compile(r'<STR([0-9]+)>')
 
@@ -91,8 +100,8 @@ def get_gang_results(file_path, region):
 
 def get_results(locus, region):
     with open(os.path.join(output_directory, locus + '.tsv'), 'w') as result_file:
-        result_file.write('dijenxxx\tEH\tTred\tGangSTR\n')
-        for file_path in sorted(glob.glob(os.path.join(input_directory, 'dijen*'))):
+        result_file.write('samplexxx\tEH\tTred\tGangSTR\n')
+        for file_path in sorted(glob.glob(os.path.join(input_directory, '*'))):
             file_name = file_path.split(os.sep)[-1]
             eh = get_eh_results(os.path.join(file_path, f'eh/{file_name}.vcf'), region)
             tred = get_tred_results(os.path.join(file_path, f'tredparse/{file_name}.tred.vcf.gz'), region)

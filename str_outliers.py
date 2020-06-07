@@ -2,30 +2,43 @@
 
 ### ASDP PIPELINE ###
 ## Version : 0.0.1
-## Licence : FIXME
-## Description : script to get automatically outliers from expansion pipeline results from getResults.py
-## Usage :
-## Output : FIXME
-## Requirements : FIXME
-
+## Licence : AGPLv3
 ## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20200202
-## last revision date : 20200216
-## Known bugs : None
+## Description : script to get automatically outliers from expansion pipeline results from getResults.py
+
 
 import collections
 import csv
+import logging
 import math
 import os
+import os.path
 import scipy.stats
 import sys
 
-path = '/work/gad/shared/analyse/STR/results'
-zscore_threshold = 4
-zscore_label = f'Z>={zscore_threshold}'
-percentile_threshold = 1.0
-percentile_label = f'{percentile_threshold}%'
 
+
+output_directory = None
+zscore_threshold = None
+percentile_threshold = None
+
+with open(os.path.join(os.path.dirname(sys.argv[0]), 'config.sh'))) as config:
+    for line in config:
+        if '=' in line:
+            variable, value = line.split('=', 1)
+            elif variable == 'RESULTS_OUTPUTDIR':
+                output_directory = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
+            elif variable == 'ZSCORE_THRESHOLD':
+                zscore_threshold = float(value.split('#')[0].strip('"\' ')) # strip double quotes, simple quotes and spaces
+            elif variable == 'PERCENTILE_THRESHOLD':
+                percentile_threshold = float(value.split('#')[0].strip('"\' ')) # strip double quotes, simple quotes and spaces
+
+if output_directory is None
+    logging.error('RESULTS_OUTPUTDIR or ZSCORE_THRESHOLD or PERCENTILE_THRESHOLD is missing in config.sh')
+    sys.exit(1)
+
+zscore_label = f'Z>={zscore_threshold}'
+percentile_label = f'{percentile_threshold}%'
 
 def load_limits():
     limits = {}
@@ -54,7 +67,7 @@ def display_outliers(locus, limits):
     # }
     results = collections.OrderedDict()
     tools_values = {}
-    with open(f'{path}{os.sep}{locus}.tsv') as result_file:
+    with open(f'{output_directory}{os.sep}{locus}.tsv') as result_file:
         tsvreader = csv.reader(result_file, delimiter='\t')
         try:
             tools = next(tsvreader)[1:]
@@ -131,7 +144,7 @@ def display_outliers(locus, limits):
                     dijen_outliers[tool][zscore_label] = '.'
 
     # Output
-    print('dijen\tEH\tEH\tEH\tEH\tTred\tTred\tTred\tTred\tGangSTR\tGangSTR\tGangSTR\tGangSTR')
+    print('sample\tEH\tEH\tEH\tEH\tTred\tTred\tTred\tTred\tGangSTR\tGangSTR\tGangSTR\tGangSTR')
     print(f'\tLimit\t{percentile_label}\t{zscore_label}\t< 3' * 3)
     for dijen, dijen_outliers in results.items():
         all_outliers = [dijen]

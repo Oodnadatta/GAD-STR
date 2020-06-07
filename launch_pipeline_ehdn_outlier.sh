@@ -14,4 +14,4 @@ printf "%s\n" * |
     "$PARALLEL" \
 	--jobs "$PARALLEL_JOB_COUNT" \
         --line-buffer \
-	"$(dirname "$0")/pipeline_ehdn_outlier.sh"
+	"$(dirname "$(readlink -f "$0"))/pipeline_ehdn_outlier.sh"
