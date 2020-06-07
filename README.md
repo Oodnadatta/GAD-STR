@@ -24,3 +24,6 @@
 8. Change z-score threshold if necessary in `triplets_outliers.py`.
 9. Launch `launch_triplets_outliers.sh`. Dependency: `patho.csv`.
 10. Get files (i.e.: `scp 'an1770de@ssh-ccub.u-bourgogne.fr:/work/gad/shared/analyse/STR/results/*' .`)
+
+
+Dans doc : préciser que le répertoire input doit être différent du répertoire d'output (précaution pour éviter de supprimer données brutes)
