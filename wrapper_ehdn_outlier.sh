@@ -6,11 +6,8 @@
 ## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Description: script to generate automatically a manifest and multisampleprofile in a tsv format, then do outlier analyses for a single patient
 
-
-EHDN="/work/gad/shared/bin/expansionhunterdenovo/ExpansionHunterDenovo-v0.8.0-linux_x86_64/bin/ExpansionHunterDenovo-v0.8.0"
-EHDN_OUTLIER="/work/gad/shared/bin/expansionhunterdenovo/ExpansionHunterDenovo-v0.8.0-linux_x86_64/scripts/outlier.py"
-REFERENCE="/work/gad/shared/pipeline/hg19/index/hg19_essential.fa"
-WORKDIR="/work/gad/shared/analyse/STR/pipeline"
+# Source the configuration file
+. "$(dirname "$0")/config.sh"
 
 # Log file path option
 if [ -z "$LOGFILE" ]
@@ -31,20 +28,20 @@ then
 fi
 
 # Generate manifest for one patient with all samples (to write lines in the file)
-cd "$WORKDIR"
+cd "$OUTPUTDIR"
 for dijen in dijen*
 do
     # Check if str_profile.json exists
-    if [ -f "$WORKDIR/$dijen/ehdn/$dijen.str_profile.json" ]
+    if [ -f "$OUTPUTDIR/$dijen/ehdn/$dijen.str_profile.json" ]
     then
         if [ "x$dijen" = "x$CASE" ]
         then
-        echo -e "$dijen\tcase\t$WORKDIR/$dijen/ehdn/$dijen.str_profile.json"
+        echo -e "$dijen\tcase\t$OUTPUTDIR/$dijen/ehdn/$dijen.str_profile.json"
         else
-        echo -e "$dijen\tcontrol\t$WORKDIR/$dijen/ehdn/$dijen.str_profile.json"
+        echo -e "$dijen\tcontrol\t$OUTPUTDIR/$dijen/ehdn/$dijen.str_profile.json"
         fi
     fi
-done > "$WORKDIR/$CASE/ehdn/$CASE.manifest.tsv"
+done > "$OUTPUTDIR/$CASE/ehdn/$CASE.manifest.tsv"
 
 ehdn_outlier_exitcode=$?
 
@@ -58,7 +55,7 @@ fi
 # Generate multisampleprofile for one patient with all samples
 "$EHDN" merge \
     --reference "$REFERENCE" \
-    --manifest "$WORKDIR/$CASE/ehdn/$CASE.manifest.tsv" \
+    --manifest "$OUTPUTDIR/$CASE/ehdn/$CASE.manifest.tsv" \
     --output-prefix "$CASE/ehdn/$CASE"
 
 ehdn_outlier_exitcode=$?
@@ -72,9 +69,9 @@ fi
 
 # Run locus-based comparison analysis
 "$EHDN_OUTLIER" locus \
-    --manifest "$WORKDIR/$CASE/ehdn/$CASE.manifest.tsv" \
-    --multisample-profile "$WORKDIR/$CASE/ehdn/$CASE.multisample_profile.json" \
-    --output "$WORKDIR/$CASE/ehdn/$CASE.outlier_locus.tsv"
+    --manifest "$OUTPUTDIR/$CASE/ehdn/$CASE.manifest.tsv" \
+    --multisample-profile "$OUTPUTDIR/$CASE/ehdn/$CASE.multisample_profile.json" \
+    --output "$OUTPUTDIR/$CASE/ehdn/$CASE.outlier_locus.tsv"
 
 ehdn_outlier_exitcode=$?
 
@@ -88,9 +85,9 @@ fi
 
 # Run motif_based comparison analysis
 "$EHDN_OUTLIER" motif \
-    --manifest "$WORKDIR/$CASE/ehdn/$CASE.manifest.tsv" \
-    --multisample-profile "$WORKDIR/$CASE/ehdn/$CASE.multisample_profile.json" \
-    --output "$WORKDIR/$CASE/ehdn/$CASE.outlier_motif.tsv"
+    --manifest "$OUTPUTDIR/$CASE/ehdn/$CASE.manifest.tsv" \
+    --multisample-profile "$OUTPUTDIR/$CASE/ehdn/$CASE.multisample_profile.json" \
+    --output "$OUTPUTDIR/$CASE/ehdn/$CASE.outlier_motif.tsv"
 
 ehdn_outlier_exitcode=$?
 

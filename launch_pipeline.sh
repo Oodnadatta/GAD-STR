@@ -1,21 +1,31 @@
 #! /bin/sh
 
 ### ASDP PIPELINE ###
-## launch_pipeline.sh
-## Version : 0.0.1
-## Licence : FIXME
-## Description : script to launch the pipeline for STR detection
-## Usage : 
-## Output : FIXME
-## Requirements : FIXME
+## Version: 0.0.1
+## Licence: AGPLV3
+## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Description: script to launch the pipeline for STR detection. Receive multiple samples: one sample per line
 
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
-## Creation Date : 20191208
-## last revision date : 20200215
-## Known bugs : None
+# $1 : first argument in the command line : a list containing one sample per line, for exemple samples.list
+SAMPLES="$1"
 
-/work/gad/shared/bin/parallel/parallel-20150522-1.el7.cern/bin/parallel \
-    --jobs 16 \
+# Check if sample is specified
+if [ -z "$SAMPLES" ]
+then
+    echo "List of samples is not specified"
+    echo "$(date +"%F_%H-%M-%S"): END"
+    exit 1
+fi
+
+# Source configuration file
+. "$(dirname "$0")/config.sh"
+
+# Parallel allow to parallelize the processing of multiple samples
+"$PARALLEL" \
+    --jobs "$PARALLEL_JOB_COUNT" \
     --line-buffer \
     "$(dirname "$0")/pipeline.sh" \
-    < genomes.list
+    < "$SAMPLES"
+
+
+

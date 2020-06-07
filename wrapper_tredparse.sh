@@ -7,6 +7,8 @@
 ## Description: a wrapper for qsubing Tredparse script for STR detection
 ## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTDIR=<output directory>,[LOGFILE=<path to the log file>] wrapper_tredparse.sh
 
+# Source the configuration file
+. "$(dirname "$0")/config.sh"
 
 # Log file path option
 if [ -z "$LOGFILE" ]
@@ -35,13 +37,15 @@ then
     exit 1
 fi
 
-# Enable the virtualenv
-TREDPARSE="/work/gad/shared/bin/tredparse/Tredparse-20190901"
-. "$TREDPARSE/bin/activate"
+# Enable the virtualenv if any
+if [ -n "$TREDPARSE_VENV" ]
+then
+    . "$TREDPARSE_VENV"
+fi
 
 # Launch script command and check exit code
-echo "command : "$TREDPARSE/bin/tred.py" "$INPUTFILE" --workdir "$OUTPUTDIR" --ref hg19"
-"$TREDPARSE/bin/tred.py" "$INPUTFILE" --workdir "$OUTPUTDIR" --ref hg19
+echo "command : $TREDPARSE $INPUTFILE --workdir $OUTPUTDIR --ref hg19"
+"$TREDPARSE" "$INPUTFILE" --workdir "$OUTPUTDIR" --ref hg19
 
 tredparse_exitcode=$?
 

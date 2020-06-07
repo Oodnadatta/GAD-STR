@@ -3,13 +3,13 @@
 - ASDP PIPELINE
 - Author: anne-sophie.denomme-pichon@u-bourgogne.fr
 - Version: 0.0.1
-- Licence: FIXME
+- Licence: AGPLv3
 - Description: How to launch scripts to get STR genotype from genomes on all the locus tested
 
-1. Create `genomes.list`
-2. Specify output file in `launch_pipeline.sh`. Warning, don't overwrite existing files
-3. Launch `launch_pipeline.sh`: `nohup ./launch_pipeline.sh &`. Dependencies:
-   - `genomes.list`
+1. Create `samples.list`
+2. Fill the configuration file `config.sh`. Warning, don't overwrite existing files
+3. Launch `launch_pipeline.sh` : `nohup ./launch_pipeline.sh samples.list &`. Dependencies :
+   - `samples.list`
    - `pipeline.sh`
    - `wrapper_delete.sh`
    - `wrapper_ehdn.sh`

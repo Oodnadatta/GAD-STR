@@ -7,6 +7,8 @@
 ## Description: a wrapper for qsubing bam deletion for STR pipeline
 ## Usage: qsub -pe smp 1 -v SAMPLE=<sample>,[LOGFILE=<path to the log file>] wrapper_delete.sh
 
+# Source the configuration file
+. "$(dirname "$0")/config.sh"
 
 # Log file path option
 if [ -z "$LOGFILE" ]
@@ -30,8 +32,8 @@ fi
 echo "command : rm \
     $SAMPLE"
 rm \
-    "/work/gad/shared/analyse/STR/pipeline/$SAMPLE/$SAMPLE.bam" \
-    "/work/gad/shared/analyse/STR/pipeline/$SAMPLE/$SAMPLE.bai"
+    "$OUTPUTDIR/$SAMPLE/$SAMPLE.bam" \
+    "$OUTPUTDIR/$SAMPLE/$SAMPLE.bai"
 
 delete_exitcode=$?
 

@@ -7,6 +7,8 @@
 ## Description: a wrapper for qsubing ExpansionHunter denovo script for STR detection
 ## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTPREFIX=<output prefix>,[LOGFILE=<path to the log file>] wrapper_ehdn.sh
 
+# Source the configuration file
+. "$(dirname "$0")/config.sh"
 
 # Log file path option
 if [ -z "$LOGFILE" ]
@@ -35,21 +37,27 @@ then
     exit 1
 fi
 
-# Create .bam and .bai symbolic links
+# Create .bam and .bai symbolic links (EHDN expects .bam.bai)
 TMPDIR="$(mktemp -d)"
 ln -s "$INPUTFILE" "$TMPDIR/$(basename "$INPUTFILE")"
-ln -s "$(echo "$INPUTFILE" | sed 's/\.bam$/.bai/')" "$TMPDIR/$(basename "$INPUTFILE").bai"
+if [ -f "$INPUTFILE.bai" ]
+then
+    ln -s "$INPUTFILE.bai" "$TMPDIR/$(basename "$INPUTFILE").bai"
+else
+    ln -s "$(echo "$INPUTFILE" | sed 's/\.bam$/.bai/')" "$TMPDIR/$(basename "$INPUTFILE").bai"
+fi
 
 # Launch script command and check exit code
-echo "command : /work/gad/shared/bin/expansionhunterdenovo/ExpansionHunterDenovo-v0.8.0-linux_x86_64/bin/ExpansionHunterDenovo-v0.8.0 profile \
-    --reads "$TMPDIR/$(basename "$INPUTFILE")" \
-    --reference /work/gad/shared/pipeline/hg19/index/hg19_essential.fa \
+echo "command : $EHDN profile \
+    --reads $TMPDIR/$(basename "$INPUTFILE") \
+    --reference $REF \
     --output-prefix $OUTPUTPREFIX \
     --min-anchor-mapq 50 \
     --max-irr-mapq 40"
-/work/gad/shared/bin/expansionhunterdenovo/ExpansionHunterDenovo-v0.8.0-linux_x86_64/bin/ExpansionHunterDenovo-v0.8.0 profile \
+
+"$EHDN" profile \
     --reads "$TMPDIR/$(basename "$INPUTFILE")" \
-    --reference /work/gad/shared/pipeline/hg19/index/hg19_essential.fa \
+    --reference "$REF" \
     --output-prefix "$OUTPUTPREFIX" \
     --min-anchor-mapq 50 \
     --max-irr-mapq 40

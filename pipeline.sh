@@ -18,31 +18,34 @@ then
     exit 1
 fi
 
-INPUTFILE="/archive/gad/shared/bam_new_genome_temp/$SAMPLE.bam"
+# Source the configuration file
+. "$(dirname "$0")/config.sh"
+
+INPUTFILE="INPUTDIR/$SAMPLE.bam"
 DATE="$(date +"%F_%H-%M-%S")"
-OUTPUTDIR="/work/gad/shared/analyse/STR/pipeline/$SAMPLE"
+OUTPUTDIR="OUTPUTDIR/$SAMPLE"
 
 # Transfer bam and bai from archive to work
 mkdir -p "$OUTPUTDIR"
-qsub -pe smp 1 -q transfer -N "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTDIR="$OUTPUTDIR",LOGFILE="$OUTPUTDIR/transfer_$DATE.log" wrapper_transfer.sh
+qsub -pe smp 1 -q "$TRANSFERQUEUE" -N "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTDIR="$OUTPUTDIR",LOGFILE="$OUTPUTDIR/transfer_$DATE.log" wrapper_transfer.sh
 
 INPUTFILE="$OUTPUTDIR/$SAMPLE.bam"
 
 # Launch ExpansionHunter
 mkdir -p "$OUTPUTDIR/eh"
-qsub -pe smp 4 -q batch  -N "eh_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/eh/$SAMPLE",LOGFILE="$OUTPUTDIR/eh/$DATE.log" wrapper_expansionhunter.sh
+qsub -pe smp 4 -q "$COMPUTEQUEUE"  -N "eh_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/eh/$SAMPLE",LOGFILE="$OUTPUTDIR/eh/$DATE.log" wrapper_expansionhunter.sh
 
 # Launch Tredparse
 mkdir -p "$OUTPUTDIR/tredparse"
-qsub -pe smp 4 -q batch -N "tredparse_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTDIR="$OUTPUTDIR/tredparse",LOGFILE="$OUTPUTDIR/tredparse/$DATE.log" wrapper_tredparse.sh
+qsub -pe smp 4 -q "$COMPUTEQUEUE" -N "tredparse_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTDIR="$OUTPUTDIR/tredparse",LOGFILE="$OUTPUTDIR/tredparse/$DATE.log" wrapper_tredparse.sh
 
 # Launch GangSTR
 mkdir -p "$OUTPUTDIR/gangstr"
-qsub -pe smp 4 -q batch -N "gangstr_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/gangstr/$SAMPLE",LOGFILE="$OUTPUTDIR/gangstr/$DATE.log" wrapper_gangstr.sh
+qsub -pe smp 4 -q "$COMPUTEQUEUE" -N "gangstr_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/gangstr/$SAMPLE",LOGFILE="$OUTPUTDIR/gangstr/$DATE.log" wrapper_gangstr.sh
 
 # Launch ehdn profile
 mkdir -p "$OUTPUTDIR/ehdn"
-qsub -pe smp 4 -q batch -N "ehdn_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/ehdn/$SAMPLE",LOGFILE="$OUTPUTDIR/ehdn/$DATE.log" wrapper_ehdn.sh
+qsub -pe smp 4 -q "$COMPUTEQUEUE" -N "ehdn_$SAMPLE" -hold_jid "transfer_$SAMPLE" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/ehdn/$SAMPLE",LOGFILE="$OUTPUTDIR/ehdn/$DATE.log" wrapper_ehdn.sh
 
 # Delete transfered bam and bai
-qsub -pe smp 1 -q batch -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -v SAMPLE="$SAMPLE",LOGFILE="$OUTPUTDIR/delete_$DATE.log" wrapper_delete.sh
+qsub -pe smp 1 -q "$COMPUTEQUEUE" -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -v SAMPLE="$SAMPLE",LOGFILE="$OUTPUTDIR/delete_$DATE.log" wrapper_delete.sh
