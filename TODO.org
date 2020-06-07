@@ -2,6 +2,9 @@
 - [ ] Ecrire la doc
   - [ ] Ajouter dans la doc que Tred doit être ouvert dans virtual
   - [ ] Mode transfert
+  - [ ] Préciser qu'il ne faut rien ajouter manuellement dans les répertoires de OUTPUTDIR (car EHDN travaille sur tous les répertoires présents dans OUTPUTDIR, uniquement samples)
 - [ ] EHDN
   - [ ] Brancher EHDN et outlier
+  - [ ] Séparer case et contrôles
   - [ ] Ajouter EHDN dans GetResults
+- [ ] Ajouter le sample dans le nom de fichier de log

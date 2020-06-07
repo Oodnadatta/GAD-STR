@@ -9,36 +9,31 @@
 # Source the configuration file
 . "$(dirname "$0")/config.sh"
 
-# Log file path option
-if [ -z "$LOGFILE" ]
-then
-    LOGFILE=ehdn_outlier.$(date +"%F_%H-%M-%S").log
-fi
-
 # Logging
+LOGFILE="$OUTPUTDIR/$CASE/ehdn/$CASE.ehdn_outlier.$(date +"%F_%H-%M-%S").log"
 exec 1>> "$LOGFILE" 2>&1
 echo "$(date +"%F_%H-%M-%S"): START"
 
 # Check if case is specified
 if [ -z "$CASE" ]
 then
-    echo "Dijen is not specified"
+    echo "Sample is not specified"
     echo "$(date +"%F_%H-%M-%S"): END"
     exit 1
 fi
 
 # Generate manifest for one patient with all samples (to write lines in the file)
 cd "$OUTPUTDIR"
-for dijen in dijen*
+for sample in *
 do
     # Check if str_profile.json exists
-    if [ -f "$OUTPUTDIR/$dijen/ehdn/$dijen.str_profile.json" ]
+    if [ -f "$OUTPUTDIR/$sample/ehdn/$sample.str_profile.json" ]
     then
-        if [ "x$dijen" = "x$CASE" ]
+        if [ "x$sample" = "x$CASE" ]
         then
-        echo -e "$dijen\tcase\t$OUTPUTDIR/$dijen/ehdn/$dijen.str_profile.json"
+        echo -e "$sample\tcase\t$OUTPUTDIR/$sample/ehdn/$sample.str_profile.json"
         else
-        echo -e "$dijen\tcontrol\t$OUTPUTDIR/$dijen/ehdn/$dijen.str_profile.json"
+        echo -e "$sample\tcontrol\t$OUTPUTDIR/$sample/ehdn/$sample.str_profile.json"
         fi
     fi
 done > "$OUTPUTDIR/$CASE/ehdn/$CASE.manifest.tsv"
