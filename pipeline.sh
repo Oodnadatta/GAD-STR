@@ -55,7 +55,7 @@ qsub -pe smp 4 -q "$COMPUTEQUEUE" -N "gangstr_$SAMPLE" -hold_jid "$TRANSFER_JOB"
 
 # Launch ehdn profile
 mkdir -p "$OUTPUTDIR/ehdn"
-qsub -pe smp 4 -q "$COMPUTEQUEUE" -N "ehdn_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/ehdn/$SAMPLE",LOGFILE="$OUTPUTDIR/ehdn/$DATE.log" wrapper_ehdn.sh
+qsub -pe smp 4 -q "$COMPUTEQUEUE" -N "ehdn_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/ehdn/$SAMPLE",LOGFILE="$OUTPUTDIR/ehdn/$DATE.log" wrapper_ehdn_profile.sh
 
 # Delete transfered bam and bai
 if [ "x$TRANSFER" = "xyes" ]

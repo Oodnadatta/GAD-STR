@@ -14,7 +14,7 @@
    - `wrapper_delete.sh`
    - `wrapper_ehdn.sh`
    - `wrapper_expansionhunter.sh`
-   - `wrapper_gangstre.sh`
+   - `wrapper_gangstr.sh`
    - `wrapper_transfer.sh`
    - `wrapper_tredparse.sh`
 4. Launch `getResults.py`. Warning, don't overwrite existing files.

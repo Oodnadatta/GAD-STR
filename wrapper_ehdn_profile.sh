@@ -5,7 +5,7 @@
 ## Licence: AGPLv3
 ## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Description: a wrapper for qsubing ExpansionHunter denovo script for STR detection
-## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTPREFIX=<output prefix>,[LOGFILE=<path to the log file>] wrapper_ehdn.sh
+## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTPREFIX=<output prefix>,[LOGFILE=<path to the log file>] wrapper_ehdn_profile.sh
 
 # Source the configuration file
 . "$(dirname "$0")/config.sh"

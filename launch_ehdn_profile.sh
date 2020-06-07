@@ -17,8 +17,8 @@ LOGFILE="$OUTPUTDIR/$DATE.log"
 if [ $# -eq 1 ] && [ "x$1" = x--local ]
 then
     mkdir -p "$OUTPUTDIR"
-    INPUTFILE="$INPUTFILE" OUTPUTPREFIX="$OUTPUTPREFIX" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_ehdn.sh"
+    INPUTFILE="$INPUTFILE" OUTPUTPREFIX="$OUTPUTPREFIX" LOGFILE="$LOGFILE" "$(dirname "$0")/wrapper_ehdn_profile.sh"
 else 
     mkdir -p "$OUTPUTDIR"
-    qsub -pe smp 4 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_ehdn.sh
+    qsub -pe smp 4 -q batch -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTPREFIX",LOGFILE="$LOGFILE" wrapper_ehdn_profile.sh
 fi
