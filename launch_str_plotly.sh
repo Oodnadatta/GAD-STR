@@ -1,6 +1,6 @@
 #! /bin/sh
 
-SCRIPT="$(dirname "$(readlink -f "$0")")/triplets_plotly.py"
+SCRIPT="$(dirname "$(readlink -f "$0")")/str_plotly.py"
 
 cd '/work/gad/shared/analyse/STR/results' || exit 1
 for locus_tsv in *.tsv; do

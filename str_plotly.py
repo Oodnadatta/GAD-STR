@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 
 ### ASDP PIPELINE ###
-## triplets_plotly.py
 ## Version : 0.0.1
 ## Licence : FIXME
 ## Description : script to get automatically graphics from expansion pipeline results from getResults.py with Plotly
