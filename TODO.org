@@ -1,6 +1,7 @@
-* Ajouter messages d'erreur
-* Ecrire la doc
-** Ajouter dans la doc que Tred doit être ouvert dans virtualenv
-*  Mode transfert
-* Brancher EHDN et outlier
-* Ajourer EHDN dans GetResults
+- [ ] Ajouter messages d'erreur
+- [ ] Ecrire la doc
+  - [ ] Ajouter dans la doc que Tred doit être ouvert dans virtual
+  - [ ] Mode transfert
+- [ ] EHDN
+  - [ ] Brancher EHDN et outlier
+  - [ ] Ajouter EHDN dans GetResults
