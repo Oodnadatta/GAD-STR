@@ -20,16 +20,16 @@ input_directory = None
 output_directory = None
 variant_catalog = None
 
-with open(os.path.join(os.path.dirname(sys.argv[0]), 'config.sh'))) as config:
+with open(os.path.join(os.path.dirname(sys.argv[0]), 'config.sh')) as config:
     for line in config:
         if '=' in line:
             variable, value = line.split('=', 1)
             if variable == 'OUTPUTDIR':
-                input_directory = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
+                input_directory = value.split('#')[0].strip('"\' \n') # strip double quotes, simple quotes and spaces, new line
             elif variable == 'RESULTS_OUTPUTDIR':
-                output_directory = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
+                output_directory = value.split('#')[0].strip('"\' \n') # strip double quotes, simple quotes and spaces, new line
             elif variable == 'EH_VARIANT_CATALOG':
-                variant_catalog = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
+                variant_catalog = value.split('#')[0].strip('"\' \n') # strip double quotes, simple quotes and spaces, new line
 
 if input_directory is None or output_directory is None or variant_catalog is None:
     logging.error('OUTPUTDIR, RESULTS_OUTPUTDIR or EH_VARIANT_CATALOG is missing in config.sh')
@@ -110,5 +110,5 @@ def get_results(locus, region):
 
 if __name__ == '__main__':
     os.makedirs(output_directory, exist_ok=True)
-    for locus, region in enumerate_variants(variants_catalog):
+    for locus, region in enumerate_variants(variant_catalog):
         get_results(locus, region)

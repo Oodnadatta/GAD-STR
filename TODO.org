@@ -12,3 +12,8 @@
 - [ ] Ajouter le sample dans le nom de fichier de log pour pieline.sh
 - [ ] Changer le répertoire de sortie : /STR/pipeline car pipeline n'est pas explicite (répertoire avec fichiers de sortie des outils de détection de STR)
 - [ ] Remove dijen from str_outliers.py
+- [ ] Prévoir l'installation des dépendances
+- [ ] Faire un launcher pour lancer getResults dans SGE
+- [ ] Ajouter la possibilité de faire tourner getResults sur une liste d'échantillons donnée (actuellement, glob *)
+- [ ] Créer le répertoire results automatiquement + avec la date
+- [ ] Ajouter la possibilité de lancer le pipeline depuis n'importe quel répertoire et pas seulement celui où se trouve les scripts

@@ -9,9 +9,11 @@
 # Source configuration file
 . "$(dirname "$0")/config.sh"
 
-cd "$OUTPUTDIR"
-printf "%s\n" * |
+(
+    cd "$OUTPUTDIR"
+    printf "%s\n" *
+) |
     "$PARALLEL" \
 	--jobs "$PARALLEL_JOB_COUNT" \
         --line-buffer \
-	"$(dirname "$(readlink -f "$0"))/pipeline_ehdn_outlier.sh"
+        "$(dirname "$0")/pipeline_ehdn_outlier.sh"
