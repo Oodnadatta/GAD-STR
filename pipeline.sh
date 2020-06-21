@@ -33,7 +33,7 @@ OUTPUTDIR="$OUTPUTDIR/$SAMPLE"
 TRANSFER_JOB=""
 WD="$(dirname "$(readlink -f "$0")")"
 
-Transfer bam and bai from archive to work
+# Transfer bam and bai from archive to work
 if [ "x$TRANSFER" = "xyes" ]
 then
     mkdir -p "$OUTPUTDIR"

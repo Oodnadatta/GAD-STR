@@ -7,8 +7,10 @@
 - Description: How to launch scripts to get STR genotype from genomes on all the locus tested
 
 1. Fill the configuration file `config.sh`.
-2. Create `samples.list` (bam file names without .bam)
-3. Launch `launch_pipeline.sh`: `nohup ./launch_pipeline.sh samples.list &`. Dependencies :
+2. Create `samples.list` (bam file names without .bam).
+
+For now, scripts have to be launched from the clone directory.
+3. Launch `launch_pipeline.sh`: `nohup ./launch_pipeline.sh samples.list &`. Dependencies:
    - `config.sh`
    - `samples.list`
    - `pipeline.sh`
@@ -18,7 +20,7 @@
    - `wrapper_gangstr.sh`
    - `wrapper_transfer.sh`
    - `wrapper_tredparse.sh`
-4. Optional: launch `launch_pipeline_ehdn_outlier.sh`: `nohup ./launch_pipeline_ehdn_outlier.sh &`. Dependencies :
+4. Optional: launch `launch_pipeline_ehdn_outlier.sh`: `nohup ./launch_pipeline_ehdn_outlier.sh &`. Dependencies:
    - `config.sh`
    - `pipeline_ehdn_outlier.sh`
    - `wrapper_ehdn_outlier.sh`
