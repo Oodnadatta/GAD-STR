@@ -4,7 +4,7 @@
 ## Version: 0.0.1
 ## Licence: AGPLV3
 ## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
-## Description: script to launch the pipeline for STR detection
+## Description: script to launch the pipeline for STR detection. This script handles a single sample.
 
 
 # $1 : first argument in the command line : the input file

@@ -8,7 +8,7 @@
 
 INPUTDIR="/archive/gad/shared/bam_new_genome_temp"
 OUTPUTDIR="/work/gad/shared/analyse/STR/pipeline"
-RESULTS_OUTPUTDIR="/work/gad/shared/analyse/STR/results" # for getResults.py, Plotly and outliers tables
+RESULTS_OUTPUTDIR="/work/gad/shared/analyse/STR/results" # For Plotly and outliers tables
 
 # Valid values: "sge"
 INFRA=sge
@@ -16,7 +16,7 @@ INFRA=sge
 # Variables specific to SGE
 TRANSFER_QUEUE=transfer
 COMPUTE_QUEUE=batch
-TRANSFER=yes #FIXME attention, changer aussi le delete +++
+TRANSFER=yes
 
 # Tools
 PARALLEL="/work/gad/shared/bin/parallel/parallel-20150522-1.el7.cern/bin/parallel"

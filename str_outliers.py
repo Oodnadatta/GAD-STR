@@ -22,18 +22,18 @@ output_directory = None
 zscore_threshold = None
 percentile_threshold = None
 
-with open(os.path.join(os.path.dirname(sys.argv[0]), 'config.sh'))) as config:
+with open(os.path.join(os.path.dirname(sys.argv[0]), 'config.sh')) as config:
     for line in config:
         if '=' in line:
             variable, value = line.split('=', 1)
-            elif variable == 'RESULTS_OUTPUTDIR':
+            if variable == 'RESULTS_OUTPUTDIR':
                 output_directory = value.split('#')[0].strip('"\' ') # strip double quotes, simple quotes and spaces
             elif variable == 'ZSCORE_THRESHOLD':
                 zscore_threshold = float(value.split('#')[0].strip('"\' ')) # strip double quotes, simple quotes and spaces
             elif variable == 'PERCENTILE_THRESHOLD':
                 percentile_threshold = float(value.split('#')[0].strip('"\' ')) # strip double quotes, simple quotes and spaces
 
-if output_directory is None
+if output_directory is None:
     logging.error('RESULTS_OUTPUTDIR or ZSCORE_THRESHOLD or PERCENTILE_THRESHOLD is missing in config.sh')
     sys.exit(1)
 
@@ -54,7 +54,7 @@ def load_limits():
             print('Limits file is empty', file=sys.stderr)
             sys.exit(1)
 
-def display_outliers(locus, limits):
+def display_outliers(locus, limits, samples):
     # results = {
     #     'dijen': {
     #         'tool': {
@@ -73,6 +73,7 @@ def display_outliers(locus, limits):
             tools = next(tsvreader)[1:]
             for row in tsvreader:
                 dijen = row[0]
+
                 results[dijen] = collections.OrderedDict()
                 for tool_id, tool in enumerate(tools):
                     tool_value = row[tool_id + 1].replace('nofile', '.').replace('-1', '.')
@@ -96,7 +97,7 @@ def display_outliers(locus, limits):
                                         results[dijen][tool]['Limit'] = tool_value
                                 else:
                                     results[dijen][tool]['Limit'] = 'NA'
-
+    
         except StopIteration:
             print('Input file is empty', file=sys.stderr)
             sys.exit(1)
@@ -157,12 +158,16 @@ def display_outliers(locus, limits):
                 all_outliers.extend(tool_outliers.values())
             else:
                 all_outliers.append('.')
-        if dijen_has_outliers:
+        if dijen_has_outliers and dijen in samples:
             print('\t'.join(all_outliers))
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print(f'Usage: {sys.argv[0].split(os.sep)[-1]} <LOCUS>', file=sys.stderr)
+    if len(sys.argv) != 3:
+        print(f'Usage: {sys.argv[0].split(os.sep)[-1]} <LOCUS> <SAMPLE.LIST>', file=sys.stderr)
         sys.exit(1)
+    with open(sys.argv[2]) as samples_list:
+        samples = set()
+        for sample in samples_list.readlines():
+            samples.add(sample.rstrip())
     limits = load_limits()
-    display_outliers(sys.argv[1], limits)
+    display_outliers(sys.argv[1], limits, samples)

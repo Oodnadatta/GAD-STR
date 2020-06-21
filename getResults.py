@@ -7,7 +7,7 @@
 ## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
 ## Description: script to get automatically results from pipeline.sh script in a tsv format on all the locus
 
-import glob
+import csv
 import gzip
 import json
 import logging
@@ -98,17 +98,44 @@ def get_gang_results(file_path, region):
         logging.warn(f'File not found "{file_path}"')
         return 'nofile'
 
-def get_results(locus, region):
-    with open(os.path.join(output_directory, locus + '.tsv'), 'w') as result_file:
-        result_file.write('samplexxx\tEH\tTred\tGangSTR\n')
-        for file_path in sorted(glob.glob(os.path.join(input_directory, '*'))):
-            file_name = file_path.split(os.sep)[-1]
-            eh = get_eh_results(os.path.join(file_path, f'eh/{file_name}.vcf'), region)
-            tred = get_tred_results(os.path.join(file_path, f'tredparse/{file_name}.tred.vcf.gz'), region)
-            gang = get_gang_results(os.path.join(file_path, f'gangstr/{file_name}.vcf'), region)
-            result_file.write(f'{file_name}\t{eh}\t{tred}\t{gang}\n')
+def get_results(locus, region, samples):
+    has_header = False
+    previous_results = set()
+    try:
+        with open(os.path.join(output_directory, locus + '.tsv'), 'r') as result_file:
+            tsvreader = csv.reader(result_file, delimiter='\t')
+            try:
+                next(tsvreader) # not take into account the header
+                has_header = True
+                for row in tsvreader:
+                    previous_results.add(row[0])
+            except StopIteration:
+                pass
+    except:
+        pass
+    
+        
+    with open(os.path.join(output_directory, locus + '.tsv'), 'a') as result_file:
+        if not has_header: # If the outputfile has not header (file empty), it adds the header (unlikely to happen)
+            result_file.write('samplexxx\tEH\tTred\tGangSTR\n')
+        for sample in samples:
+            if sample not in previous_results:
+                file_path = os.path.join(input_directory, sample)
+                print(file_path)
+                eh = get_eh_results(os.path.join(file_path, f'eh/{sample}.vcf'), region)
+                tred = get_tred_results(os.path.join(file_path, f'tredparse/{sample}.tred.vcf.gz'), region)
+                gang = get_gang_results(os.path.join(file_path, f'gangstr/{sample}.vcf'), region)
+                result_file.write(f'{sample}\t{eh}\t{tred}\t{gang}\n')
 
 if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print(f'Usage: {sys.argv[0].split(os.sep)[-1]} <SAMPLESLIST>', file=sys.stderr)
+        sys.exit(1)
+    with open(sys.argv[1]) as samples_list:
+        samples = []
+        for sample in sorted(samples_list.readlines()):
+            samples.append(sample.rstrip())
     os.makedirs(output_directory, exist_ok=True)
     for locus, region in enumerate_variants(variant_catalog):
-        get_results(locus, region)
+        print(locus, region)
+        get_results(locus, region, samples)

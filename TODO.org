@@ -9,11 +9,14 @@
   - [ ] Brancher EHDN et outlier
   - [ ] Séparer case et contrôles
   - [ ] Ajouter EHDN dans GetResults
-- [ ] Ajouter le sample dans le nom de fichier de log pour pieline.sh
+- [ ] Ajouter le sample dans le nom de fichier de log pour pipeline.sh
 - [ ] Changer le répertoire de sortie : /STR/pipeline car pipeline n'est pas explicite (répertoire avec fichiers de sortie des outils de détection de STR)
 - [ ] Remove dijen from str_outliers.py
 - [ ] Prévoir l'installation des dépendances
 - [ ] Faire un launcher pour lancer getResults dans SGE
-- [ ] Ajouter la possibilité de faire tourner getResults sur une liste d'échantillons donnée (actuellement, glob *)
-- [ ] Créer le répertoire results automatiquement + avec la date
-- [ ] Ajouter la possibilité de lancer le pipeline depuis n'importe quel répertoire et pas seulement celui où se trouve les scripts
+- [X] Ajouter la possibilité de faire tourner getResults sur une liste d'échantillons donnée (actuellement, glob *)
+- [X] Créer le répertoire results automatiquement (sans la date)
+- [ ] Ajouter la possibilité de lancer le pipeline depuis n'importe quel répertoire et pas seulement celui où se trouvent les scripts
+- [ ] Créer un script pour faire le ménage après le passage de SGE
+- [ ] Possibilité de choisir les outils à utiliser (par exemple, option pour ne pas utiliser GangSTR)
+- [X] Gérer l'absence de queue transfer

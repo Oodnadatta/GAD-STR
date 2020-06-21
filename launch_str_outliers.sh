@@ -9,12 +9,25 @@
 # Source configuration file
 . "$(dirname "$0")/config.sh"
 
-SCRIPT="$(dirname "$(readlink -f "$0")")/str_outliers.py"
+# $1 : first argument in the command line : a list containing one sample per line, for exemple samples.list
+SAMPLES="$1"
 
-cd "$OUTPUTDIR" || exit 1
-for locus_tsv in $(ls *.tsv | grep -v outliers); do
+# Check if sample is specified
+if [ -z "$SAMPLES" ]
+then
+    echo "List of samples is not specified"
+    echo "$(date +"%F_%H-%M-%S"): END"
+    exit 1
+fi
+
+SCRIPT="$(dirname "$(readlink -f "$0")")/str_outliers.py"
+SAMPLES="$(dirname "$(readlink -f "$0")")/$SAMPLES"
+
+cd "$RESULTS_OUTPUTDIR" || exit 1
+
+   for locus_tsv in $(ls *.tsv | grep -v outliers); do
     locus="$(basename "$locus_tsv" ".tsv")"
     echo "Processing $locus" >&2
-    "$SCRIPT" "$locus" > "$locus.outliers.tsv"
+    "$SCRIPT" "$locus" "$SAMPLES" > "$locus.outliers.tsv"
 done
 
