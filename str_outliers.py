@@ -167,7 +167,9 @@ if __name__ == '__main__':
         sys.exit(1)
     with open(sys.argv[2]) as samples_list:
         samples = set()
-        for sample in samples_list.readlines():
-            samples.add(sample.rstrip())
+        for line in samples_list.readlines():
+            sample = line.rstrip()
+            if sample:
+                samples.add(sample)
     limits = load_limits()
     display_outliers(sys.argv[1], limits, samples)

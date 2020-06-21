@@ -133,8 +133,10 @@ if __name__ == '__main__':
         sys.exit(1)
     with open(sys.argv[1]) as samples_list:
         samples = []
-        for sample in sorted(samples_list.readlines()):
-            samples.append(sample.rstrip())
+        for line in sorted(samples_list.readlines()):
+            sample = line.rstrip()
+            if sample:
+                samples.append(sample)
     os.makedirs(output_directory, exist_ok=True)
     for locus, region in enumerate_variants(variant_catalog):
         print(locus, region)

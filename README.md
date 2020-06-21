@@ -6,7 +6,7 @@
 - Licence: AGPLv3
 - Description: How to launch scripts to get STR genotype from genomes on all the locus tested
 
-1. Create `samples.list`
+1. Create `samples.list` (bam file names without .bam)
 2. Fill the configuration file `config.sh`.
 3. Launch `launch_pipeline.sh`: `nohup ./launch_pipeline.sh samples.list &`. Dependencies :
    - `config.sh`
