@@ -24,7 +24,7 @@ For now, scripts have to be launched from the clone directory.
    - `config.sh`
    - `pipeline_ehdn_outlier.sh`
    - `wrapper_ehdn_outlier.sh`
-5. Launch `launch_results.sh`: `nohup ./launch_results.sh &`. Dependencies:
+5. Launch `launch_results.sh`: `nohup ./launch_results.sh samples.list &`. Dependencies:
    - `config.sh`
    - `sample.list`
    - `patho.csv`
