@@ -3,7 +3,7 @@
 ### ASDP PIPELINE ###
 ## Version: 0.0.1
 ## Licence: AGPLV3
-## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Author: Anne-Sophie Denommé-Pichon
 ## Description: a wrapper for qsubing bam deletion for STR pipeline
 ## Usage: qsub -pe smp 1 -v SAMPLE=<sample>,[LOGFILE=<path to the log file>] wrapper_delete.sh
 

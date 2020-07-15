@@ -1,7 +1,7 @@
 # STR detection pipeline
 
 - ASDP PIPELINE
-- Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+- Author:  Anne-Sophie Denommé-Pichon
 - Version: 0.0.1
 - Licence: AGPLv3
 - Description: How to launch scripts to get STR genotype from genomes on all the locus tested
@@ -32,5 +32,5 @@ For now, scripts have to be launched from the clone directory.
    - `launch_str_outliers.sh`
    - `str_outliers.py`
 6. Optional: launch `launch_str_plotly.sh`.
-7. Get files (i.e.: `scp 'an1770de@ssh-ccub.u-bourgogne.fr:/work/gad/shared/analyse/STR/results/*' .`)
+7. Get files (i.e.: `scp 'username@ssh-ccub.u-bourgogne.fr:/work/gad/shared/analyse/STR/results/*' .`)
 

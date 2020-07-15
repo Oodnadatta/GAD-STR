@@ -3,7 +3,7 @@
 ### ASDP pipeline###
 ## Version: 0.0.1
 ## License; AGPLv3
-## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Author: Anne-Sophie Denommé-Pichon
 ## Description: configuration file
 
 INPUTDIR="/archive/gad/shared/bam_new_genome_temp"

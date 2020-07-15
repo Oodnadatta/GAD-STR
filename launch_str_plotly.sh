@@ -3,7 +3,7 @@
 ### ASDP pipeline###
 ## Version: 0.0.1
 ## License; AGPLv3
-## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Author: Anne-Sophie Denommé-Pichon
 ## Description: script to launch the script to get automatically graphics from expansion pipeline results from getResults.py with Plotly
 
 # Source configuration file

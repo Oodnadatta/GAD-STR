@@ -3,7 +3,7 @@
 ### ASDP PIPELINE ###
 ## Version: 0.0.1
 ## Licence: AGPLV3
-## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Author: Anne-Sophie Denommé-Pichon
 ## Description: script to launch the pipeline for getting STR detection results. Receive multiple samples: one sample per line
 
 # $1 : first argument in the command line : a list containing one sample per line, for exemple samples.list

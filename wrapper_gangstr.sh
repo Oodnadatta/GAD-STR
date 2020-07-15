@@ -3,7 +3,7 @@
 ### ASDP PIPELINE ###
 ## Version: 0.0.1
 ## Licence: AGPLv3
-## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Author: Anne-Sophie Denommé-Pichon
 ## Description: a wrapper for qsubing GangSTR script for STR detection
 ## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,OUTPUTPREFIX=<output prefix>,[LOGFILE=<path to the log file>] wrapper_gangstr.sh
 

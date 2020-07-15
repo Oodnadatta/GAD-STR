@@ -3,7 +3,7 @@
 ### ASDP PIPELINE ###
 ## Version : 0.0.1
 ## Licence : AGPLv3
-## Author : anne-sophie.denomme-pichon@u-bourgogne.fr
+## Author : Anne-Sophie Denommé-Pichon
 ## Description : script to get automatically outliers from expansion pipeline results from getResults.py
 
 

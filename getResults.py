@@ -4,7 +4,7 @@
 ## getResults.py
 ## Version: 0.0.1
 ## Licence: AGPLv3
-## Author: anne-sophie.denomme-pichon@u-bourgogne.fr
+## Author: Anne-Sophie Denommé-Pichon
 ## Description: script to get automatically results from pipeline.sh script in a tsv format on all the locus
 
 import csv
