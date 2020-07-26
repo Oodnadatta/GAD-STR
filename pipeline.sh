@@ -38,30 +38,30 @@ if [ "x$TRANSFER" = "xyes" ]
 then
     mkdir -p "$OUTPUTDIR"
     TRANSFER_JOB="transfer_$SAMPLE"
-    qsub -wd "$WD" -pe smp 1 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$TRANSFER_QUEUE" -N "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",TRANSFER_OUTPUTDIR="$OUTPUTDIR",LOGFILE="$OUTPUTDIR/transfer_$DATE.log" wrapper_transfer.sh
+    qsub -wd "$WD" -pe smp 1 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$TRANSFER_QUEUE" -N "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",TRANSFER_OUTPUTDIR="$OUTPUTDIR",LOGFILE="$OUTPUTDIR/transfer_$DATE.log" "$WD/wrapper_transfer.sh"
     INPUTFILE="$OUTPUTDIR/$SAMPLE.bam"
 fi
 
 # Launch ExpansionHunter
 mkdir -p "$OUTPUTDIR/eh"
-qsub -wd "$WD" -pe smp 4 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE"  -N "eh_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/eh/$SAMPLE",LOGFILE="$OUTPUTDIR/eh/$DATE.log" wrapper_expansionhunter.sh
+qsub -wd "$WD" -pe smp 4 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE"  -N "eh_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/eh/$SAMPLE",LOGFILE="$OUTPUTDIR/eh/$DATE.log" "$WD/wrapper_expansionhunter.sh"
 
 # Launch Tredparse
 mkdir -p "$OUTPUTDIR/tredparse"
-qsub -wd "$WD" -pe smp 4 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "tredparse_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",TREDPARSE_OUTPUTDIR="$OUTPUTDIR/tredparse",LOGFILE="$OUTPUTDIR/tredparse/$DATE.log" wrapper_tredparse.sh
+qsub -wd "$WD" -pe smp 4 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "tredparse_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",TREDPARSE_OUTPUTDIR="$OUTPUTDIR/tredparse",LOGFILE="$OUTPUTDIR/tredparse/$DATE.log" "$WD/wrapper_tredparse.sh"
 
 # Launch GangSTR
 mkdir -p "$OUTPUTDIR/gangstr"
-qsub -wd "$WD" -pe smp 4 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "gangstr_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/gangstr/$SAMPLE",LOGFILE="$OUTPUTDIR/gangstr/$DATE.log" wrapper_gangstr.sh
+qsub -wd "$WD" -pe smp 4 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "gangstr_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/gangstr/$SAMPLE",LOGFILE="$OUTPUTDIR/gangstr/$DATE.log" "$WD/wrapper_gangstr.sh"
 
 # Launch ehdn profile
 mkdir -p "$OUTPUTDIR/ehdn"
-qsub -wd "$WD" -pe smp 4 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "ehdn_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/ehdn/$SAMPLE",LOGFILE="$OUTPUTDIR/ehdn/$DATE.log" wrapper_ehdn_profile.sh
+qsub -wd "$WD" -pe smp 4 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "ehdn_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$OUTPUTDIR/ehdn/$SAMPLE",LOGFILE="$OUTPUTDIR/ehdn/$DATE.log" "$WD/wrapper_ehdn_profile.sh"
 
 # Delete transfered bam and bai
 if [ "x$TRANSFER" = "xyes" ]
 then
-    qsub -wd "$WD" -pe smp 1 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -v SAMPLE="$SAMPLE",LOGFILE="$OUTPUTDIR/delete_$DATE.log" wrapper_delete.sh
+    qsub -wd "$WD" -pe smp 1 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -v SAMPLE="$SAMPLE",LOGFILE="$OUTPUTDIR/delete_$DATE.log" "$WD/wrapper_delete.sh"
 else
     qsub -wd "$WD" -pe smp 1 -o "$OUTPUTDIR" -e "$OUTPUTDIR" -q "$COMPUTE_QUEUE" -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -b y echo "Nothing to delete."
 fi
