@@ -32,8 +32,8 @@ fi
 echo "command : rm \
     $SAMPLE"
 rm \
-    "$OUTPUTDIR/$SAMPLE/$SAMPLE.bam" \
-    "$OUTPUTDIR/$SAMPLE/$SAMPLE.bai"
+    "$OUTPUTDIR/$SAMPLE/str/$SAMPLE.bam" \
+    "$OUTPUTDIR/$SAMPLE/str/$SAMPLE.bai"
 
 delete_exitcode=$?
 

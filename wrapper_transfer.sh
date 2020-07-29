@@ -7,7 +7,6 @@
 ## Description: a wrapper for qsubing bam transfer for STR pipeline
 ## Usage: qsub -pe smp 1 -v INPUTFILE=<path to the bam file>,TRANSFER_OUTPUTDIR=<output directory>,[LOGFILE=<path to the log file>] wrapper_transfer.sh
 
-
 # Log file path option
 if [ -z "$LOGFILE" ]
 then
