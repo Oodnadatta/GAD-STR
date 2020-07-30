@@ -102,7 +102,7 @@ def display_outliers(locus, limits, samples):
             print('Input file is empty', file=sys.stderr)
             sys.exit(1)
 
-    # outlier threshold (exemple: 5%)
+    # outlier threshold (example: 5%)
     for tool, tool_values in tools_values.items():
         # Test if there is at least one value given by the tool
         if tool_values:

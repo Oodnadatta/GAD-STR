@@ -20,13 +20,14 @@ For now, scripts have to be launched from the clone directory.
    - `wrapper_gangstr.sh`
    - `wrapper_transfer.sh`
    - `wrapper_tredparse.sh`
-4. Optional: launch `launch_pipeline_ehdn_outlier.sh`: `nohup ./launch_pipeline_ehdn_outlier.sh &`. Dependencies:
+4. Optional: launch `launch_pipeline_ehdn_outlier.sh`: `nohup ./launch_pipeline_ehdn_outlier.sh samples.list &`. Dependencies:
    - `config.sh`
+   - `samples.list`
    - `pipeline_ehdn_outlier.sh`
    - `wrapper_ehdn_outlier.sh`
 5. Launch `launch_results.sh`: `nohup ./launch_results.sh samples.list &`. Dependencies:
    - `config.sh`
-   - `sample.list`
+   - `samples.list`
    - `patho.csv`
    - `getResults.py`
    - `launch_str_outliers.sh`

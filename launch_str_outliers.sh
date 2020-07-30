@@ -9,7 +9,7 @@
 # Source configuration file
 . "$(dirname "$0")/config.sh"
 
-# $1 : first argument in the command line : a list containing one sample per line, for exemple samples.list
+# $1 : first argument in the command line : a list containing one sample per line, for example samples.list
 SAMPLES="$1"
 
 # Check if sample is specified

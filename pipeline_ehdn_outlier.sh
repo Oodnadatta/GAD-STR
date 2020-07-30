@@ -10,6 +10,15 @@
 . "$(dirname "$0")/config.sh"
 
 CASE="$1"
+SAMPLES="$2"
+DATE="$(date +"%F_%H-%M-%S")"
+WD="$(dirname "$(readlink -f "$0")")"
 
-qsub -wd "$(dirname "$(readlink -f "$0")")" -pe smp 1 -q "$COMPUTE_QUEUE" -N "ehdn_outlier_$CASE" -sync y -v CASE="$CASE" wrapper_ehdn_outlier.sh
+LOGDIR="$OUTPUTDIR/logs"
+STRDIR="$OUTPUTDIR/str"
+
+mkdir -p "$LOGDIR" "$STRDIR"
+
+
+qsub -wd "$WD" -pe smp 1 -o "$LOGDIR" -e "$LOGDIR" -q "$COMPUTE_QUEUE" -N "ehdn_outlier_$CASE" -sync y -v CASE="$CASE",SAMPLES="$SAMPLES",LOGFILE="$LOGDIR/ehdn_outlier_$CASE.$DATE.log" "$WD/wrapper_ehdn_outlier.sh"
 

@@ -6,7 +6,7 @@
 ## Author: Anne-Sophie Denommé-Pichon
 ## Description: script to launch the pipeline for STR detection. Receive multiple samples: one sample per line
 
-# $1 : first argument in the command line : a list containing one sample per line, for exemple samples.list
+# $1 : first argument in the command line : a list containing one sample per line, for example samples.list
 SAMPLES="$1"
 
 # Check if sample is specified
