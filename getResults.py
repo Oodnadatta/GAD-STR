@@ -122,9 +122,9 @@ def get_results(locus, region, samples):
             if sample not in previous_results:
                 file_path = os.path.join(input_directory, sample)
                 print(file_path)
-                eh = get_eh_results(os.path.join(file_path, f'eh/{sample}.vcf'), region)
-                tred = get_tred_results(os.path.join(file_path, f'tredparse/{sample}.tred.vcf.gz'), region)
-                gang = get_gang_results(os.path.join(file_path, f'gangstr/{sample}.vcf'), region)
+                eh = get_eh_results(os.path.join(file_path, f'str/eh/{sample}.vcf'), region)
+                tred = get_tred_results(os.path.join(file_path, f'str/tredparse/{sample}.tred.vcf.gz'), region)
+                gang = get_gang_results(os.path.join(file_path, f'str/gangstr/{sample}.vcf'), region)
                 result_file.write(f'{sample}\t{eh}\t{tred}\t{gang}\n')
 
 if __name__ == '__main__':

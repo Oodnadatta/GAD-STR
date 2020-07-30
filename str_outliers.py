@@ -6,7 +6,6 @@
 ## Author : Anne-Sophie Denommé-Pichon
 ## Description : script to get automatically outliers from expansion pipeline results from getResults.py
 
-
 import collections
 import csv
 import logging
@@ -15,8 +14,6 @@ import os
 import os.path
 import scipy.stats
 import sys
-
-
 
 output_directory = None
 zscore_threshold = None
@@ -163,7 +160,7 @@ def display_outliers(locus, limits, samples):
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
-        print(f'Usage: {sys.argv[0].split(os.sep)[-1]} <LOCUS> <SAMPLE.LIST>', file=sys.stderr)
+        print(f'Usage: {sys.argv[0].split(os.sep)[-1]} <LOCUS> <SAMPLES.LIST>', file=sys.stderr)
         sys.exit(1)
     with open(sys.argv[2]) as samples_list:
         samples = set()

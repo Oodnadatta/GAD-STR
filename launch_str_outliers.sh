@@ -21,7 +21,7 @@ then
 fi
 
 SCRIPT="$(dirname "$(readlink -f "$0")")/str_outliers.py"
-SAMPLES="$(dirname "$(readlink -f "$0")")/$SAMPLES"
+SAMPLES="$(readlink -f "$SAMPLES")"
 
 cd "$RESULTS_OUTPUTDIR" || exit 1
 
