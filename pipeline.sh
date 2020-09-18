@@ -28,7 +28,7 @@ fi
 #    exit 1
 #fi
 
-INPUTFILE="$INPUTDIR/$SAMPLE.bam"
+INPUTFILE="$INPUTDIR/$SAMPLE/$SAMPLE.bam"
 DATE="$(date +"%F_%H-%M-%S")"
 OUTPUTDIR="$OUTPUTDIR/$SAMPLE"
 TRANSFER_JOB=""
@@ -40,11 +40,14 @@ STRDIR="$OUTPUTDIR/str"
 mkdir -p "$LOGDIR" "$STRDIR"
 
 # Transfer bam and bai from archive to work
+TRANSFER_JOB="transfer_$SAMPLE"
 if [ "x$TRANSFER" = "xyes" ]
 then
-    TRANSFER_JOB="transfer_$SAMPLE"
+    INPUTFILE="$INPUTDIR/$SAMPLE.bam"
     qsub -wd "$WD" -pe smp 1 -o "$LOGDIR" -e "$LOGDIR" -q "$TRANSFER_QUEUE" -N "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",TRANSFER_OUTPUTDIR="$STRDIR",LOGFILE="$LOGDIR/transfer_$SAMPLE.$DATE.log" "$WD/wrapper_transfer.sh"
     INPUTFILE="$STRDIR/$SAMPLE.bam"
+else
+    qsub -wd "$WD" -pe smp 1 -o "$LOGDIR" -e "$LOGDIR" -q "$COMPUTE_QUEUE" -N "$TRANSFER_JOB" -b y echo "No bam transfer."
 fi
 
 # Launch ExpansionHunter
