@@ -67,9 +67,9 @@ mkdir -p "$STRDIR/ehdn"
 qsub -wd "$WD" -pe smp 4 -o "$LOGDIR" -e "$LOGDIR" -q "$COMPUTE_QUEUE" -N "ehdn_$SAMPLE" -hold_jid "$TRANSFER_JOB" -v INPUTFILE="$INPUTFILE",OUTPUTPREFIX="$STRDIR/ehdn/$SAMPLE",LOGFILE="$LOGDIR/ehdn_profile_$SAMPLE.$DATE.log" "$WD/wrapper_ehdn_profile.sh"
 
 # Delete transfered bam and bai
-#if [ "x$TRANSFER" = "xyes" ]
-#then
-#    qsub -wd "$WD" -pe smp 1 -o "$LOGDIR" -e "$LOGDIR" -q "$COMPUTE_QUEUE" -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -v SAMPLE="$SAMPLE",LOGFILE="$LOGDIR/delete_$SAMPLE.$DATE.log" "$WD/wrapper_delete.sh"
-#else
+if [ "x$TRANSFER" = "xyes" ]
+then
+    qsub -wd "$WD" -pe smp 1 -o "$LOGDIR" -e "$LOGDIR" -q "$COMPUTE_QUEUE" -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -v SAMPLE="$SAMPLE",LOGFILE="$LOGDIR/delete_$SAMPLE.$DATE.log" "$WD/wrapper_delete.sh"
+else
     qsub -wd "$WD" -pe smp 1 -o "$LOGDIR" -e "$LOGDIR" -q "$COMPUTE_QUEUE" -N "delete_$SAMPLE" -hold_jid "eh_$SAMPLE,tredparse_$SAMPLE,gangstr_$SAMPLE,ehdn_$SAMPLE" -sync y -b y echo "Nothing to delete."
-#fi
+fi
