@@ -19,6 +19,8 @@ COMPUTE_QUEUE=batch
 TRANSFER=yes
 
 # Tools
+PYTHON="/work/gad/shared/bin/python3.6/python3"
+
 PARALLEL="/work/gad/shared/bin/parallel/parallel-20150522-1.el7.cern/bin/parallel"
 PARALLEL_JOB_COUNT="16"
 

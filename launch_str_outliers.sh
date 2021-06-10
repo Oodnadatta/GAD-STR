@@ -28,6 +28,6 @@ cd "$RESULTS_OUTPUTDIR" || exit 1
    for locus_tsv in $(ls *.tsv | grep -v outliers); do
     locus="$(basename "$locus_tsv" ".tsv")"
     echo "Processing $locus" >&2
-    "$SCRIPT" "$locus" "$SAMPLES" > "$locus.outliers.tsv"
+    "$PYTHON" "$SCRIPT" "$locus" "$SAMPLES" > "$locus.outliers.tsv"
 done
 

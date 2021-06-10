@@ -75,7 +75,7 @@ then
 fi
 
 # Run locus-based comparison analysis
-"$EHDN_OUTLIER" locus \
+"$PYTHON" "$EHDN_OUTLIER" locus \
     --manifest "$OUTPUTDIR/$CASE/str/ehdn/$CASE.manifest.tsv" \
     --multisample-profile "$OUTPUTDIR/$CASE/str/ehdn/$CASE.multisample_profile.json" \
     --output "$OUTPUTDIR/$CASE/str/ehdn/$CASE.outlier_locus.tsv"
@@ -91,7 +91,7 @@ fi
 
 
 # Run motif_based comparison analysis
-"$EHDN_OUTLIER" motif \
+"$PYTHON" "$EHDN_OUTLIER" motif \
     --manifest "$OUTPUTDIR/$CASE/str/ehdn/$CASE.manifest.tsv" \
     --multisample-profile "$OUTPUTDIR/$CASE/str/ehdn/$CASE.multisample_profile.json" \
     --output "$OUTPUTDIR/$CASE/str/ehdn/$CASE.outlier_motif.tsv"

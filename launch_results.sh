@@ -24,7 +24,7 @@ fi
 mkdir -p "$RESULTS_OUTPUTDIR"
 
 # Launch getResults.py
-"$(dirname "$0")/getResults.py" "$SAMPLES"
+"$PYTHON" "$(dirname "$0")/getResults.py" "$SAMPLES"
 
 # Launch launch_str_outliers.sh
 "$(dirname "$0")/launch_str_outliers.sh" "$SAMPLES"
