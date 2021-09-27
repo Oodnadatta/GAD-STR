@@ -27,8 +27,8 @@ PARALLEL_JOB_COUNT="16"
 EH="/work/gad/shared/bin/expansionhunter/ExpansionHunter-v3.1.2-linux_x86_64/bin/ExpansionHunter"
 EH_VARIANT_CATALOG="/work/gad/shared/bin/expansionhunter/ExpansionHunter-v3.1.2-linux_x86_64/variant_catalog/hg19/variant_catalog.json"
 
-TREDPARSE="/work/gad/shared/bin/tredparse/Tredparse-20190901/bin/tred.py"
-TREDPARSE_VENV="/work/gad/shared/bin/tredparse/Tredparse-20190901/bin/activate" # To load Tredparse in a virtual environment
+TREDPARSE="/work/gad/shared/bin/tredparse/Tredparse-20190901-2/bin/tred.py"
+TREDPARSE_VENV="/work/gad/shared/bin/tredparse/Tredparse-20190901-2/bin/activate" # To load Tredparse in a virtual environment
 
 GANGSTR="/work/gad/shared/bin/gangstr/GangSTR-2.4/bin/GangSTR"
 GANGSTR_REGIONS="/work/gad/shared/bin/gangstr/STRregions/hg19_ver13_1.bed"
