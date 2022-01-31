@@ -35,11 +35,10 @@ Dependencies:
 
 ### Identifying outliers 
 
-To highlight abnormal repeat counts, the pipeline identified outliers using 3 methods: repeats counts at a given locus
-
- 1. > normal (in the gray zone or pathological zone)
- 2. > 99th percentile or
- 3. ≥ 4 standard deviations above the mean (Z-score ≥ 4). 
+To highlight abnormal repeat counts, the pipeline identified outliers using 3 methods: 
+ 1. repeats counts at a given locus > normal (in the gray zone or pathological zone)
+ 2. repeats counts at a given locus > 99th percentile or
+ 3. repeats counts at a given locus ≥ 4 standard deviations above the mean (Z-score ≥ 4). 
 
 Launch `launch_results.sh`:
 
