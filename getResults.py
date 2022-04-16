@@ -43,9 +43,9 @@ def enumerate_variants(catalog_path):
 
         for variant in variants:
             region = variant['ReferenceRegion']
-            # TODO handle other regions?
             if isinstance(region, list):
-                region = region[0]
+                locus_index = variant['VariantId'].index(variant['LocusId'])
+                region = region[locus_index]
             chrom, pos = region.split(':')
             pos = pos.split('-')[0]
             yield variant['LocusId'], (chrom, pos)
